@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		505C22961ECC115F0047903D /* IMG_0049.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 505C22951ECC115F0047903D /* IMG_0049.JPG */; };
+		505C22981ECC1EFE0047903D /* lizi.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 505C22971ECC1EFE0047903D /* lizi.JPG */; };
+		505C229A1ECC1F040047903D /* conan.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 505C22991ECC1F040047903D /* conan.PNG */; };
+		507FA10D1EC9A2D70074D808 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA10C1EC9A2D70074D808 /* main.m */; };
+		507FA1101EC9A2D70074D808 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA10F1EC9A2D70074D808 /* AppDelegate.m */; };
+		507FA1131EC9A2D70074D808 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA1121EC9A2D70074D808 /* ViewController.m */; };
+		507FA1161EC9A2D70074D808 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507FA1141EC9A2D70074D808 /* Main.storyboard */; };
+		507FA1181EC9A2D70074D808 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507FA1171EC9A2D70074D808 /* Assets.xcassets */; };
+		507FA11B1EC9A2D70074D808 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507FA1191EC9A2D70074D808 /* LaunchScreen.storyboard */; };
+		507FA1261EC9A2D70074D808 /* JKClipImageToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA1251EC9A2D70074D808 /* JKClipImageToolTests.m */; };
+		507FA1311EC9A2D70074D808 /* JKClipImageToolUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA1301EC9A2D70074D808 /* JKClipImageToolUITests.m */; };
+		507FA1401EC9A3140074D808 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA13F1EC9A3140074D808 /* TestViewController.m */; };
+		50CA14401F415449002766D2 /* JKFreeImageClipCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */; };
+		50CA14411F415449002766D2 /* JKFreeImageClipRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */; };
+		50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143B1F415449002766D2 /* JKFreeImageClipView.m */; };
+		50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143D1F415449002766D2 /* JKImageClipTool.m */; };
+		50CA14441F415449002766D2 /* JKSqureImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143F1F415449002766D2 /* JKSqureImageClipView.m */; };
+		50F3207F1ECEFD260022F298 /* JKClipImageToolResouce.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		507FA1221EC9A2D70074D808 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 507FA1001EC9A2D70074D808 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 507FA1071EC9A2D70074D808;
+			remoteInfo = JKClipImageTool;
+		};
+		507FA12D1EC9A2D70074D808 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 507FA1001EC9A2D70074D808 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 507FA1071EC9A2D70074D808;
+			remoteInfo = JKClipImageTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		505C22951ECC115F0047903D /* IMG_0049.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0049.JPG; sourceTree = "<group>"; };
+		505C22971ECC1EFE0047903D /* lizi.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lizi.JPG; sourceTree = "<group>"; };
+		505C22991ECC1F040047903D /* conan.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conan.PNG; sourceTree = "<group>"; };
+		5069C2FC201F0EB7004116AE /* JKImageClipToolMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKImageClipToolMacro.h; sourceTree = "<group>"; };
+		507FA1081EC9A2D70074D808 /* JKClipImageTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKClipImageTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		507FA10C1EC9A2D70074D808 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		507FA10E1EC9A2D70074D808 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		507FA10F1EC9A2D70074D808 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		507FA1111EC9A2D70074D808 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		507FA1121EC9A2D70074D808 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		507FA1151EC9A2D70074D808 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		507FA1171EC9A2D70074D808 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		507FA11A1EC9A2D70074D808 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		507FA11C1EC9A2D70074D808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		507FA1211EC9A2D70074D808 /* JKClipImageToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKClipImageToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		507FA1251EC9A2D70074D808 /* JKClipImageToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKClipImageToolTests.m; sourceTree = "<group>"; };
+		507FA1271EC9A2D70074D808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		507FA12C1EC9A2D70074D808 /* JKClipImageToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKClipImageToolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		507FA1301EC9A2D70074D808 /* JKClipImageToolUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKClipImageToolUITests.m; sourceTree = "<group>"; };
+		507FA1321EC9A2D70074D808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		507FA13E1EC9A3140074D808 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		507FA13F1EC9A3140074D808 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		50CA14361F415449002766D2 /* JKFreeImageClipCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipCoverView.h; sourceTree = "<group>"; };
+		50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipCoverView.m; sourceTree = "<group>"; };
+		50CA14381F415449002766D2 /* JKFreeImageClipRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipRectView.h; sourceTree = "<group>"; };
+		50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipRectView.m; sourceTree = "<group>"; };
+		50CA143A1F415449002766D2 /* JKFreeImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipView.h; sourceTree = "<group>"; };
+		50CA143B1F415449002766D2 /* JKFreeImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipView.m; sourceTree = "<group>"; };
+		50CA143C1F415449002766D2 /* JKImageClipTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKImageClipTool.h; sourceTree = "<group>"; };
+		50CA143D1F415449002766D2 /* JKImageClipTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKImageClipTool.m; sourceTree = "<group>"; };
+		50CA143E1F415449002766D2 /* JKSqureImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSqureImageClipView.h; sourceTree = "<group>"; };
+		50CA143F1F415449002766D2 /* JKSqureImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSqureImageClipView.m; sourceTree = "<group>"; };
+		50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JKClipImageToolResouce.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		507FA1051EC9A2D70074D808 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA11E1EC9A2D70074D808 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA1291EC9A2D70074D808 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5046F4741ECEE3B0003F9AC2 /* JKImageClip */ = {
+			isa = PBXGroup;
+			children = (
+				50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */,
+				50CA14361F415449002766D2 /* JKFreeImageClipCoverView.h */,
+				50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */,
+				50CA14381F415449002766D2 /* JKFreeImageClipRectView.h */,
+				50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */,
+				50CA143A1F415449002766D2 /* JKFreeImageClipView.h */,
+				50CA143B1F415449002766D2 /* JKFreeImageClipView.m */,
+				50CA143C1F415449002766D2 /* JKImageClipTool.h */,
+				50CA143D1F415449002766D2 /* JKImageClipTool.m */,
+				5069C2FC201F0EB7004116AE /* JKImageClipToolMacro.h */,
+				50CA143E1F415449002766D2 /* JKSqureImageClipView.h */,
+				50CA143F1F415449002766D2 /* JKSqureImageClipView.m */,
+			);
+			path = JKImageClip;
+			sourceTree = "<group>";
+		};
+		507FA0FF1EC9A2D70074D808 = {
+			isa = PBXGroup;
+			children = (
+				507FA10A1EC9A2D70074D808 /* JKClipImageTool */,
+				507FA1241EC9A2D70074D808 /* JKClipImageToolTests */,
+				507FA12F1EC9A2D70074D808 /* JKClipImageToolUITests */,
+				507FA1091EC9A2D70074D808 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		507FA1091EC9A2D70074D808 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				507FA1081EC9A2D70074D808 /* JKClipImageTool.app */,
+				507FA1211EC9A2D70074D808 /* JKClipImageToolTests.xctest */,
+				507FA12C1EC9A2D70074D808 /* JKClipImageToolUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		507FA10A1EC9A2D70074D808 /* JKClipImageTool */ = {
+			isa = PBXGroup;
+			children = (
+				507FA10E1EC9A2D70074D808 /* AppDelegate.h */,
+				507FA10F1EC9A2D70074D808 /* AppDelegate.m */,
+				507FA1111EC9A2D70074D808 /* ViewController.h */,
+				507FA1121EC9A2D70074D808 /* ViewController.m */,
+				507FA13E1EC9A3140074D808 /* TestViewController.h */,
+				507FA13F1EC9A3140074D808 /* TestViewController.m */,
+				5046F4741ECEE3B0003F9AC2 /* JKImageClip */,
+				505C22991ECC1F040047903D /* conan.PNG */,
+				505C22971ECC1EFE0047903D /* lizi.JPG */,
+				505C22951ECC115F0047903D /* IMG_0049.JPG */,
+				507FA1141EC9A2D70074D808 /* Main.storyboard */,
+				507FA1171EC9A2D70074D808 /* Assets.xcassets */,
+				507FA1191EC9A2D70074D808 /* LaunchScreen.storyboard */,
+				507FA11C1EC9A2D70074D808 /* Info.plist */,
+				507FA10B1EC9A2D70074D808 /* Supporting Files */,
+			);
+			path = JKClipImageTool;
+			sourceTree = "<group>";
+		};
+		507FA10B1EC9A2D70074D808 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				507FA10C1EC9A2D70074D808 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		507FA1241EC9A2D70074D808 /* JKClipImageToolTests */ = {
+			isa = PBXGroup;
+			children = (
+				507FA1251EC9A2D70074D808 /* JKClipImageToolTests.m */,
+				507FA1271EC9A2D70074D808 /* Info.plist */,
+			);
+			path = JKClipImageToolTests;
+			sourceTree = "<group>";
+		};
+		507FA12F1EC9A2D70074D808 /* JKClipImageToolUITests */ = {
+			isa = PBXGroup;
+			children = (
+				507FA1301EC9A2D70074D808 /* JKClipImageToolUITests.m */,
+				507FA1321EC9A2D70074D808 /* Info.plist */,
+			);
+			path = JKClipImageToolUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		507FA1071EC9A2D70074D808 /* JKClipImageTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 507FA1351EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageTool" */;
+			buildPhases = (
+				507FA1041EC9A2D70074D808 /* Sources */,
+				507FA1051EC9A2D70074D808 /* Frameworks */,
+				507FA1061EC9A2D70074D808 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JKClipImageTool;
+			productName = JKClipImageTool;
+			productReference = 507FA1081EC9A2D70074D808 /* JKClipImageTool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		507FA1201EC9A2D70074D808 /* JKClipImageToolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 507FA1381EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageToolTests" */;
+			buildPhases = (
+				507FA11D1EC9A2D70074D808 /* Sources */,
+				507FA11E1EC9A2D70074D808 /* Frameworks */,
+				507FA11F1EC9A2D70074D808 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				507FA1231EC9A2D70074D808 /* PBXTargetDependency */,
+			);
+			name = JKClipImageToolTests;
+			productName = JKClipImageToolTests;
+			productReference = 507FA1211EC9A2D70074D808 /* JKClipImageToolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		507FA12B1EC9A2D70074D808 /* JKClipImageToolUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 507FA13B1EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageToolUITests" */;
+			buildPhases = (
+				507FA1281EC9A2D70074D808 /* Sources */,
+				507FA1291EC9A2D70074D808 /* Frameworks */,
+				507FA12A1EC9A2D70074D808 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				507FA12E1EC9A2D70074D808 /* PBXTargetDependency */,
+			);
+			name = JKClipImageToolUITests;
+			productName = JKClipImageToolUITests;
+			productReference = 507FA12C1EC9A2D70074D808 /* JKClipImageToolUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		507FA1001EC9A2D70074D808 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "安永博";
+				TargetAttributes = {
+					507FA1071EC9A2D70074D808 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YX4Y4G65BK;
+						ProvisioningStyle = Automatic;
+					};
+					507FA1201EC9A2D70074D808 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YX4Y4G65BK;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 507FA1071EC9A2D70074D808;
+					};
+					507FA12B1EC9A2D70074D808 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YX4Y4G65BK;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 507FA1071EC9A2D70074D808;
+					};
+				};
+			};
+			buildConfigurationList = 507FA1031EC9A2D70074D808 /* Build configuration list for PBXProject "JKClipImageTool" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 507FA0FF1EC9A2D70074D808;
+			productRefGroup = 507FA1091EC9A2D70074D808 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				507FA1071EC9A2D70074D808 /* JKClipImageTool */,
+				507FA1201EC9A2D70074D808 /* JKClipImageToolTests */,
+				507FA12B1EC9A2D70074D808 /* JKClipImageToolUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		507FA1061EC9A2D70074D808 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				505C22961ECC115F0047903D /* IMG_0049.JPG in Resources */,
+				507FA11B1EC9A2D70074D808 /* LaunchScreen.storyboard in Resources */,
+				507FA1181EC9A2D70074D808 /* Assets.xcassets in Resources */,
+				505C229A1ECC1F040047903D /* conan.PNG in Resources */,
+				50F3207F1ECEFD260022F298 /* JKClipImageToolResouce.bundle in Resources */,
+				505C22981ECC1EFE0047903D /* lizi.JPG in Resources */,
+				507FA1161EC9A2D70074D808 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA11F1EC9A2D70074D808 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA12A1EC9A2D70074D808 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		507FA1041EC9A2D70074D808 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */,
+				507FA1131EC9A2D70074D808 /* ViewController.m in Sources */,
+				50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */,
+				50CA14411F415449002766D2 /* JKFreeImageClipRectView.m in Sources */,
+				507FA1101EC9A2D70074D808 /* AppDelegate.m in Sources */,
+				50CA14441F415449002766D2 /* JKSqureImageClipView.m in Sources */,
+				507FA1401EC9A3140074D808 /* TestViewController.m in Sources */,
+				50CA14401F415449002766D2 /* JKFreeImageClipCoverView.m in Sources */,
+				507FA10D1EC9A2D70074D808 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA11D1EC9A2D70074D808 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				507FA1261EC9A2D70074D808 /* JKClipImageToolTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		507FA1281EC9A2D70074D808 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				507FA1311EC9A2D70074D808 /* JKClipImageToolUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		507FA1231EC9A2D70074D808 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 507FA1071EC9A2D70074D808 /* JKClipImageTool */;
+			targetProxy = 507FA1221EC9A2D70074D808 /* PBXContainerItemProxy */;
+		};
+		507FA12E1EC9A2D70074D808 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 507FA1071EC9A2D70074D808 /* JKClipImageTool */;
+			targetProxy = 507FA12D1EC9A2D70074D808 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		507FA1141EC9A2D70074D808 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				507FA1151EC9A2D70074D808 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		507FA1191EC9A2D70074D808 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				507FA11A1EC9A2D70074D808 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		507FA1331EC9A2D70074D808 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		507FA1341EC9A2D70074D808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		507FA1361EC9A2D70074D808 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		507FA1371EC9A2D70074D808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		507FA1391EC9A2D70074D808 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JKClipImageTool.app/JKClipImageTool";
+			};
+			name = Debug;
+		};
+		507FA13A1EC9A2D70074D808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageToolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageToolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JKClipImageTool.app/JKClipImageTool";
+			};
+			name = Release;
+		};
+		507FA13C1EC9A2D70074D808 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = JKClipImageTool;
+			};
+			name = Debug;
+		};
+		507FA13D1EC9A2D70074D808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = YX4Y4G65BK;
+				INFOPLIST_FILE = JKClipImageToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tailinkj.JKClipImageToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = JKClipImageTool;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		507FA1031EC9A2D70074D808 /* Build configuration list for PBXProject "JKClipImageTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				507FA1331EC9A2D70074D808 /* Debug */,
+				507FA1341EC9A2D70074D808 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		507FA1351EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				507FA1361EC9A2D70074D808 /* Debug */,
+				507FA1371EC9A2D70074D808 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		507FA1381EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageToolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				507FA1391EC9A2D70074D808 /* Debug */,
+				507FA13A1EC9A2D70074D808 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		507FA13B1EC9A2D70074D808 /* Build configuration list for PBXNativeTarget "JKClipImageToolUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				507FA13C1EC9A2D70074D808 /* Debug */,
+				507FA13D1EC9A2D70074D808 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 507FA1001EC9A2D70074D808 /* Project object */;
+}
