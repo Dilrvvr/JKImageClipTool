@@ -464,6 +464,6 @@
 }
 
 - (void)dealloc{
-    //NSLog(@"%d, %s",__LINE__, __func__);
+    NSLog(@"%d, %s",__LINE__, __func__);
 }
 @end

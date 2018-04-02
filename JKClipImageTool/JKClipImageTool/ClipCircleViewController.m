@@ -33,17 +33,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"圆形裁剪";
     
+    __weak typeof(self) weakSelf = self;
+    
     [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
         
-        !self.complete ? : self.complete(image);
+        !weakSelf.complete ? : weakSelf.complete(image);
         
     } cancel:^{
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
         
-        !self.cancel ? : self.cancel();
+        !weakSelf.cancel ? : weakSelf.cancel();
     }];
 }
 
