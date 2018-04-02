@@ -10,12 +10,12 @@
 
 @interface JKSqureImageClipView : UIView
 
-/** 
+/**
  * 裁剪正方形图片
  * image : 要裁剪的图片
+ * isCircle : 是否裁剪为圆形
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
- * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (void)showWithImage:(UIImage *)image isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
 @end

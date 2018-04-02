@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T4e-FM-qyJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T4e-FM-qyJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -87,12 +87,26 @@
                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUh-tz-6Ck">
+                                <rect key="frame" x="196" y="72" width="62" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8h7-AT-qAx"/>
+                                </constraints>
+                                <state key="normal" title="圆形裁剪"/>
+                                <connections>
+                                    <action selector="circleClip:" destination="hxz-Q4-YYh" eventType="touchUpInside" id="YQb-En-jkE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qe9-uu-bzJ" firstAttribute="centerX" secondItem="s2H-Bb-t3V" secondAttribute="centerX" id="86q-lU-Bgq"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="D0P-LI-9E3" secondAttribute="trailing" constant="20" symbolic="YES" id="8NK-Pg-BOm"/>
+                            <constraint firstItem="uUh-tz-6Ck" firstAttribute="width" secondItem="D0P-LI-9E3" secondAttribute="width" id="KEd-yv-S2t"/>
                             <constraint firstItem="NGY-7e-drV" firstAttribute="centerY" secondItem="s2H-Bb-t3V" secondAttribute="centerY" id="MMk-dE-xI9"/>
+                            <constraint firstItem="uUh-tz-6Ck" firstAttribute="top" secondItem="D0P-LI-9E3" secondAttribute="top" id="S98-Jm-qu6"/>
+                            <constraint firstItem="uUh-tz-6Ck" firstAttribute="bottom" secondItem="D0P-LI-9E3" secondAttribute="bottom" id="U7k-lH-n91"/>
                             <constraint firstItem="qe9-uu-bzJ" firstAttribute="top" secondItem="Xt0-eZ-CuY" secondAttribute="bottom" constant="8.5" id="dXU-L5-wyM"/>
                             <constraint firstItem="D0P-LI-9E3" firstAttribute="leading" secondItem="Xt0-eZ-CuY" secondAttribute="trailing" constant="28" id="hL7-u4-mOY"/>
                             <constraint firstItem="Xt0-eZ-CuY" firstAttribute="leading" secondItem="s2H-Bb-t3V" secondAttribute="leading" constant="16" id="lF6-1l-2ai"/>
@@ -101,6 +115,7 @@
                             <constraint firstItem="NGY-7e-drV" firstAttribute="leading" secondItem="s2H-Bb-t3V" secondAttribute="leading" id="p1V-8p-E16"/>
                             <constraint firstItem="NGY-7e-drV" firstAttribute="centerX" secondItem="s2H-Bb-t3V" secondAttribute="centerX" id="pym-KU-ij7"/>
                             <constraint firstAttribute="trailing" secondItem="NGY-7e-drV" secondAttribute="trailing" id="rPa-pr-KFM"/>
+                            <constraint firstItem="uUh-tz-6Ck" firstAttribute="leading" secondItem="D0P-LI-9E3" secondAttribute="trailing" constant="28" id="wXt-f3-Wau"/>
                         </constraints>
                     </view>
                     <connections>

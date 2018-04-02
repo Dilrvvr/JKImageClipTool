@@ -16,24 +16,41 @@
 /**
  * 裁剪图片
  * image : 要裁剪的图片
- * isJustShowImage : 是否仅用于展示图片
- * isSquare : 是否裁剪正方形
+ * imageClipType : 裁剪样式
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image isJustShowImage:(BOOL)isJustShowImage isSquare:(BOOL)isSquare autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (void)showWithImage:(UIImage *)image imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
-    if (isJustShowImage) {
-        [JKFreeImageClipView showWithImage:image complete:complete cancel:cancel];
-        return;
+    switch (imageClipType) {
+            
+        case JKImageClipTypeJustShowImage:
+        {
+            [JKFreeImageClipView showWithImage:image complete:complete cancel:cancel];
+        }
+            break;
+            
+        case JKImageClipTypeSquare:
+        {
+            [JKSqureImageClipView showWithImage:image isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+        }
+            break;
+            
+        case JKImageClipTypeCircle:
+        {
+            [JKSqureImageClipView showWithImage:image isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+        }
+            break;
+            
+        case JKImageClipTypeFree:
+        {
+            [JKFreeImageClipView showWithImage:image autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+        }
+            break;
+            
+        default:
+            break;
     }
-    
-    if (isSquare) {
-        [JKSqureImageClipView showWithImage:image autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
-        return;
-    }
-    
-    [JKFreeImageClipView showWithImage:image autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
 }
 @end

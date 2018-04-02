@@ -112,7 +112,7 @@ static BOOL isClip = YES;
 - (UIScrollView *)scrollView{
     if (!_scrollView) {
         // scrollView
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:JKScreenBounds];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:JKImageClipScreenBounds];
         scrollView.delegate = self;
         scrollView.backgroundColor = [UIColor clearColor];
         
@@ -170,7 +170,7 @@ static BOOL isClip = YES;
 
 - (void)initialization{
     self.backgroundColor = [UIColor blackColor];
-    self.frame = JKScreenBounds;
+    self.frame = JKImageClipScreenBounds;
     minWH = 60;
     
     [[UIView appearance] setExclusiveTouch:YES];
@@ -209,7 +209,7 @@ static BOOL isClip = YES;
 
 - (void)setupBottomView{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKScreenH - 60 - (JKFreeImageClipViewIsIphoneX ? 34 : 0), JKScreenW, 60 + (JKFreeImageClipViewIsIphoneX ? 34 : 0))];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - 60 - (JKFreeImageClipViewIsIphoneX ? 34 : 0), JKImageClipScreenW, 60 + (JKFreeImageClipViewIsIphoneX ? 34 : 0))];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
     [self addSubview:bottomView];
     self.bottomView = bottomView;
@@ -225,7 +225,7 @@ static BOOL isClip = YES;
     UIButton *verifyButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [verifyButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [verifyButton setTitle:@"确定" forState:(UIControlStateNormal)];
-    verifyButton.frame = CGRectMake(JKScreenW - 90, 0, 90, 60);
+    verifyButton.frame = CGRectMake(JKImageClipScreenW - 90, 0, 90, 60);
     [bottomView addSubview:verifyButton];
     
     [verifyButton addTarget:self action:@selector(verifyButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -323,7 +323,7 @@ static BOOL isClip = YES;
     
     if (pan.state == UIGestureRecognizerStateEnded) {
         //NSLog(@"结束拖拽转换坐标--->%@", NSStringFromCGRect([self.scrollView convertRect:self.imageView.frame toView:self]));
-        self.scrollView.contentInset = UIEdgeInsetsMake(self.rectView.frame.origin.y, self.rectView.frame.origin.x, JKScreenH - CGRectGetMaxY(self.rectView.frame), JKScreenW - CGRectGetMaxX(self.rectView.frame));
+        self.scrollView.contentInset = UIEdgeInsetsMake(self.rectView.frame.origin.y, self.rectView.frame.origin.x, JKImageClipScreenH - CGRectGetMaxY(self.rectView.frame), JKImageClipScreenW - CGRectGetMaxX(self.rectView.frame));
         self.scrollView.minimumZoomScale = (self.rectView.frame.size.width / startPicW < (self.rectView.frame.size.height / startPicH) ? (self.rectView.frame.size.height / startPicH) : self.rectView.frame.size.width / startPicW);
         isPanning = NO;
     }
@@ -349,7 +349,7 @@ static BOOL isClip = YES;
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
 //        minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
         minY = rect.origin.y < JKFreeImageClipViewTopMinInset ? JKFreeImageClipViewTopMinInset : rect.origin.y;
-        maxW = (CGRectGetMaxX(rect) > JKScreenW - commonMargin_ ? JKScreenW - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
+        maxW = (CGRectGetMaxX(rect) > JKImageClipScreenW - commonMargin_ ? JKImageClipScreenW - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
         maxH = CGRectGetMaxY(self.rectView.frame) - minY;
         return 2;
     }
@@ -357,8 +357,8 @@ static BOOL isClip = YES;
     if ([self.rectView.bottom_right_imageView pointInside:[self convertPoint:point toView:self.rectView.bottom_right_imageView] withEvent:nil]) {
         
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        maxW = (CGRectGetMaxX(rect) > JKScreenW - commonMargin_ ? JKScreenW - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
-        maxH = (CGRectGetMaxY(rect) > JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
+        maxW = (CGRectGetMaxX(rect) > JKImageClipScreenW - commonMargin_ ? JKImageClipScreenW - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
+        maxH = (CGRectGetMaxY(rect) > JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
         return 3;
     }
     
@@ -369,7 +369,7 @@ static BOOL isClip = YES;
         minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
         
         maxW = CGRectGetMaxX(self.rectView.frame) - minX;
-        maxH = (CGRectGetMaxY(rect) > JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
+        maxH = (CGRectGetMaxY(rect) > JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
         return 4;
     }
     
@@ -380,11 +380,11 @@ static BOOL isClip = YES;
         minY = rect.origin.y < JKFreeImageClipViewTopMinInset ? JKFreeImageClipViewTopMinInset : rect.origin.y;
         
         
-        maxX = CGRectGetMaxX(rect) > JKScreenW - commonMargin_ ? JKScreenW - commonMargin_ - self.rectView.frame.size.width : CGRectGetMaxX(rect) - self.rectView.frame.size.width;
-        maxY = CGRectGetMaxY(rect) > JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - self.rectView.frame.size.height : CGRectGetMaxY(rect) - self.rectView.frame.size.height;
+        maxX = CGRectGetMaxX(rect) > JKImageClipScreenW - commonMargin_ ? JKImageClipScreenW - commonMargin_ - self.rectView.frame.size.width : CGRectGetMaxX(rect) - self.rectView.frame.size.width;
+        maxY = CGRectGetMaxY(rect) > JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - self.rectView.frame.size.height : CGRectGetMaxY(rect) - self.rectView.frame.size.height;
         
 //        maxW = CGRectGetMaxX(self.rectView.frame) - minX;
-//        maxH = (CGRectGetMaxY(rect) > JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
+//        maxH = (CGRectGetMaxY(rect) > JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
         return 5;
     }
     
@@ -400,10 +400,10 @@ static BOOL isClip = YES;
     }
     self.bottomView.userInteractionEnabled = NO;
     
-    self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+    self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = JKScreenBounds;
+        self.frame = JKImageClipScreenBounds;
     }];
 }
 
@@ -416,9 +416,9 @@ static BOOL isClip = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-        CGRect rect = [self convertRect:self.imageView.frame toView:self];
-        rect.origin.x = -self.scrollView.contentOffset.x;
-        rect.origin.y = -self.scrollView.contentOffset.y;
+        CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
+//        rect.origin.x = -self.scrollView.contentOffset.x;
+//        rect.origin.y = -self.scrollView.contentOffset.y;
         //NSLog(@"转换--->%@", NSStringFromCGRect(rect));
         
         [UIView animateWithDuration:0.25 animations:^{
@@ -427,7 +427,7 @@ static BOOL isClip = YES;
             [self.rectView layoutIfNeeded];
             
         } completion:^(BOOL finished) {
-            self.coverView.frame = JKScreenBounds;
+            self.coverView.frame = JKImageClipScreenBounds;
             self.coverView.transparentRect = self.rectView.frame;
             self.bottomView.userInteractionEnabled = YES;
         }];
@@ -457,12 +457,12 @@ static BOOL isClip = YES;
 - (void)calculateImageViewSize{
     
     //图片要显示的尺寸
-    CGFloat pictureW = JKScreenW - commonMargin_ * 2;
+    CGFloat pictureW = JKImageClipScreenW - commonMargin_ * 2;
     CGFloat pictureH = pictureW * self.image.size.height / self.image.size.width;
     
-    if (pictureH > JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset) {//图片高过屏幕
+    if (pictureH > JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset) {//图片高过屏幕
         
-        pictureH = JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset;
+        pictureH = JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset;
         pictureW = pictureH * self.image.size.width / self.image.size.height;
         
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
@@ -474,18 +474,18 @@ static BOOL isClip = YES;
         
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);//CGSizeMake(pictureW, pictureH);
         //图片显示在中间
-        //        self.imageView.center= CGPointMake(JKScreenW * 0.5, JKScreenH * 0.5);
+        //        self.imageView.center= CGPointMake(JKImageClipScreenW * 0.5, JKImageClipScreenH * 0.5);
     }
     //设置scrollView的contentSize
     self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
-    self.scrollView.maximumZoomScale = (JKScreenW - commonMargin_ * 2) * 3 / ((pictureW >= pictureH) ? pictureH : pictureW);
+    self.scrollView.maximumZoomScale = (JKImageClipScreenW - commonMargin_ * 2) * 3 / ((pictureW >= pictureH) ? pictureH : pictureW);
     
     startPicW = pictureW;
     startPicH = pictureH;
     
     [self setInset];
     
-    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - JKScreenW) * 0.5);
+    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - JKImageClipScreenW) * 0.5);
 }
 
 #pragma mark - 点击事件
@@ -530,7 +530,7 @@ static BOOL isClip = YES;
     self.userInteractionEnabled = NO;
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
     } completion:^(BOOL finished) {
         
@@ -549,7 +549,7 @@ static BOOL isClip = YES;
     self.userInteractionEnabled = NO;
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
     } completion:^(BOOL finished) {
         
@@ -560,7 +560,7 @@ static BOOL isClip = YES;
 }
 
 - (UIImage *)clipImage{
-    //    if (self.imageView.frame.size.height < JKScreenW) {
+    //    if (self.imageView.frame.size.height < JKImageClipScreenW) {
     
     self.shapeLayer.hidden = YES;
     
@@ -569,17 +569,22 @@ static BOOL isClip = YES;
     self.rectView.hidden = YES;
     
     // NO代表透明
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, NO, JKImageClipScreenScale);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    [self.layer renderInContext:ctx];
+    [self.imageView.layer renderInContext:ctx];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
     
-    CGRect rect = CGRectMake(self.rectView.frame.origin.x * JKScreenScale, self.rectView.frame.origin.y * JKScreenScale, self.rectView.frame.size.width * JKScreenScale, self.rectView.frame.size.height * JKScreenScale);
+    CGRect rect = [self convertRect:self.rectView.frame toView:self.imageView];//CGRectMake(self.rectView.frame.origin.x * JKImageClipScreenScale, self.rectView.frame.origin.y * JKImageClipScreenScale, self.rectView.frame.size.width * JKImageClipScreenScale, (self.rectView.frame.size.height) * JKImageClipScreenScale);
+    
+    rect.origin.x = rect.origin.x < 0 ? 0 : rect.origin.x * JKImageClipScreenScale;
+    rect.origin.y = rect.origin.y < 0 ? 0 : rect.origin.y * JKImageClipScreenScale;
+    rect.size.width = rect.size.width > self.imageView.frame.size.width ? self.imageView.frame.size.width * JKImageClipScreenScale : rect.size.width * JKImageClipScreenScale;
+    rect.size.height = rect.size.height > self.imageView.frame.size.height ? self.imageView.frame.size.height * JKImageClipScreenScale : rect.size.height * JKImageClipScreenScale;
     
     //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(image.size));
     //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
@@ -599,16 +604,16 @@ static BOOL isClip = YES;
     //
     //    //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(self.image.size));
     //
-    //    CGRect rect = CGRectMake(0, (JKScreenH - JKScreenW) * 0.5, JKScreenW, JKScreenW);
+    //    CGRect rect = CGRectMake(0, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW, JKImageClipScreenW);
     //
     //    CGRect convertRect = [self convertRect:rect toView:self.imageView];
     //    //NSLog(@"转换后范围--->%@", NSStringFromCGRect(convertRect));
     //
     //    convertRect = CGRectMake(
-    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKScreenScale,
-    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKScreenScale);
+    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
+    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKImageClipScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale);
     //    //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
     //
     //    CGImageRef imageRef = CGImageCreateWithImageInRect(self.image.CGImage, convertRect);
@@ -645,14 +650,14 @@ static BOOL isClip = YES;
     
     if (!isClip) return;
     
-    self.scrollView.contentInset = UIEdgeInsetsMake(self.rectView.frame.origin.y, self.rectView.frame.origin.x, JKScreenH - CGRectGetMaxY(self.rectView.frame), JKScreenW - CGRectGetMaxX(self.rectView.frame));
+    self.scrollView.contentInset = UIEdgeInsetsMake(self.rectView.frame.origin.y, self.rectView.frame.origin.x, JKImageClipScreenH - CGRectGetMaxY(self.rectView.frame), JKImageClipScreenW - CGRectGetMaxX(self.rectView.frame));
 }
 
 - (void)setInset{
     
     // 计算内边距，注意只能使用frame
-    CGFloat offsetX = (JKScreenW - self.imageView.frame.size.width) * 0.5;
-    CGFloat offsetY = (JKScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetX = (JKImageClipScreenW - self.imageView.frame.size.width) * 0.5;
+    CGFloat offsetY = (JKImageClipScreenH - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
     offsetX = (offsetX < commonMargin_) ? commonMargin_ : offsetX;

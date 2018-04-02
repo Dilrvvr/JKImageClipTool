@@ -7,8 +7,7 @@
 //
 
 #import "TestViewController.h"
-#import "JKSqureImageClipView.h"
-#import "JKFreeImageClipView.h"
+#import "JKImageClipTool.h"
 
 @interface TestViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -17,18 +16,34 @@
 
 /** 是否裁剪为正方形 */
 @property (nonatomic, assign) BOOL isClipSquare;
+
+/** 是否裁剪为圆形*/
+@property (nonatomic, assign) BOOL isClipCircle;
 @end
 
 @implementation TestViewController
 
 - (IBAction)clip:(id)sender {
+    
+    self.isClipCircle = NO;
+    
     self.isClipSquare = YES;
     
     [self pictureAlert];
 }
 
 - (IBAction)freeClip:(id)sender {
+    
+    self.isClipCircle = NO;
+    
     self.isClipSquare = NO;
+    
+    [self pictureAlert];
+}
+
+- (IBAction)circleClip:(id)sender {
+    
+    self.isClipCircle = YES;
     
     [self pictureAlert];
 }
@@ -137,9 +152,25 @@
     
     pickImage = info[UIImagePickerControllerOriginalImage];
     
+    if (self.isClipCircle) {
+        
+        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
+            
+            self.imageView.image = image;
+            
+        } cancel:^{
+            
+        }];
+        
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
+        return;
+    }
+    
     if (self.isClipSquare) {
         
-        [JKSqureImageClipView showWithImage:pickImage autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
+            
             self.imageView.image = image;
             
         } cancel:^{
@@ -148,7 +179,7 @@
         
     }else{
         
-        [JKFreeImageClipView showWithImage:pickImage autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             

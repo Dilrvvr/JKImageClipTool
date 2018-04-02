@@ -32,6 +32,9 @@
 /** 图片 */
 @property (nonatomic, strong) UIImage *image;
 
+/** 是否裁剪为圆形 */
+@property (nonatomic, assign) BOOL isCircle;
+
 /** 是否自动保存截图到相册 */
 @property (nonatomic, assign) BOOL autoSavaToAlbum;
 
@@ -42,15 +45,17 @@
 /**
  * 裁剪正方形图片
  * image : 要裁剪的图片
+ * isCircle : 是否裁剪为圆形
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (void)showWithImage:(UIImage *)image autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (void)showWithImage:(UIImage *)image isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     if (!image) {
         return;
     }
     
     JKSqureImageClipView *icv = [[JKSqureImageClipView alloc] init];
+    icv.isCircle = isCircle;
     icv.image = image;
     icv.complete = complete;
     icv.cancel = cancel;
@@ -66,10 +71,21 @@
         //        _shapeLayer.lineWidth = 1;
         _shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
         //        _shapeLayer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
-        _shapeLayer.frame = JKScreenBounds;
-        UIBezierPath *fullPath = [UIBezierPath bezierPathWithRect:CGRectMake(-1, -1, JKScreenW + 2, JKScreenH + 2)];
-        UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:CGRectMake(1, (JKScreenH - JKScreenW) * 0.5, JKScreenW - 2, JKScreenW)];
-        [fullPath appendPath:rectPath];
+        _shapeLayer.frame = JKImageClipScreenBounds;
+        UIBezierPath *fullPath = [UIBezierPath bezierPathWithRect:CGRectMake(-1, -1, JKImageClipScreenW + 2, JKImageClipScreenH + 2)];
+        
+        UIBezierPath *path = nil;
+        
+        if (_isCircle) {
+            
+            path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(1, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW - 2, JKImageClipScreenW) cornerRadius:(JKImageClipScreenW - 2) * 0.5];
+            
+        }else{
+            
+            path = [UIBezierPath bezierPathWithRect:CGRectMake(1, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW - 2, JKImageClipScreenW)];
+        }
+        
+        [fullPath appendPath:path];
         [fullPath setUsesEvenOddFillRule:YES];
         
         _shapeLayer.path = fullPath.CGPath;
@@ -95,7 +111,7 @@
 
 - (void)initialization{
     self.backgroundColor = [UIColor blackColor];
-    self.frame = JKScreenBounds;
+    self.frame = JKImageClipScreenBounds;
     
     [self setExclusiveTouch:YES];
     
@@ -141,7 +157,7 @@
 
 - (void)setupBottomView{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKScreenH - JKFreeImageClipViewBottomViewH, JKScreenW, JKFreeImageClipViewBottomViewH)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - JKFreeImageClipViewBottomViewH, JKImageClipScreenW, JKFreeImageClipViewBottomViewH)];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
     [self addSubview:bottomView];
     self.bottomView = bottomView;
@@ -157,7 +173,7 @@
     UIButton *verifyButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [verifyButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [verifyButton setTitle:@"确定" forState:(UIControlStateNormal)];
-    verifyButton.frame = CGRectMake(JKScreenW - 90, 0, 90, 60);
+    verifyButton.frame = CGRectMake(JKImageClipScreenW - 90, 0, 90, 60);
     [bottomView addSubview:verifyButton];
     
     [verifyButton addTarget:self action:@selector(verifyButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -166,10 +182,10 @@
 - (void)willMoveToSuperview:(UIView *)newSuperview{
     [super willMoveToSuperview:newSuperview];
     
-    self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+    self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = JKScreenBounds;
+        self.frame = JKImageClipScreenBounds;
     }];
 }
 
@@ -198,10 +214,10 @@
 
 - (void)calculateImageViewSize{
     //图片要显示的尺寸
-    CGFloat pictureW = JKScreenW;
-    CGFloat pictureH = JKScreenW * self.image.size.height / self.image.size.width;
+    CGFloat pictureW = JKImageClipScreenW;
+    CGFloat pictureH = JKImageClipScreenW * self.image.size.height / self.image.size.width;
     
-    if (pictureH > JKScreenH) {//图片高过屏幕
+    if (pictureH > JKImageClipScreenH) {//图片高过屏幕
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
         //设置scrollView的contentSize
         //        self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
@@ -210,14 +226,14 @@
     }else{//图片不高于屏幕
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);//CGSizeMake(pictureW, pictureH);
         //图片显示在中间
-        //        self.imageView.center= CGPointMake(JKScreenW * 0.5, JKScreenH * 0.5);
+        //        self.imageView.center= CGPointMake(JKImageClipScreenW * 0.5, JKImageClipScreenH * 0.5);
     }
     //设置scrollView的contentSize
     self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
     
     [self setInset];
     
-    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - JKScreenW) * 0.5);
+    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - JKImageClipScreenW) * 0.5);
 }
 
 #pragma mark - 点击事件
@@ -231,7 +247,7 @@
     }
     
     // 双击缩小
-    if (self.imageView.frame.size.width > JKScreenW) {
+    if (self.imageView.frame.size.width > JKImageClipScreenW) {
         [self.scrollView setZoomScale:1 animated:YES];
         
         return;
@@ -249,7 +265,7 @@
     self.userInteractionEnabled = NO;
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
     } completion:^(BOOL finished) {
         
@@ -267,7 +283,7 @@
     
     [UIView animateWithDuration:0.25 animations:^{
         
-        self.frame = CGRectMake(JKScreenW, 0, JKScreenW, JKScreenH);
+        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
     } completion:^(BOOL finished) {
         
@@ -278,22 +294,36 @@
 }
 
 - (UIImage *)clipImage{
-    //    if (self.imageView.frame.size.height < JKScreenW) {
+    //    if (self.imageView.frame.size.height < JKImageClipScreenW) {
     
     self.shapeLayer.hidden = YES;
     
     // NO代表透明
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, NO, 0.0);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    [self.layer renderInContext:ctx];
+    [self.imageView.layer renderInContext:ctx];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
     
-    CGRect rect = CGRectMake(0, (image.size.height - image.size.width) * JKScreenScale * 0.5, image.size.width * JKScreenScale, image.size.width * JKScreenScale);
+    CGRect rect1 = CGRectMake(0, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW, JKImageClipScreenW);//CGRectMake(0, (image.size.height - image.size.width) * JKImageClipScreenScale * 0.5, image.size.width * JKImageClipScreenScale, image.size.width * JKImageClipScreenScale);
+    
+    CGRect rect = [self convertRect:rect1 toView:self.imageView];
+    
+    rect.origin.x = rect.origin.x < 0 ? 0 : rect.origin.x * JKImageClipScreenScale;
+    rect.origin.y = rect.origin.y < 0 ? 0 : rect.origin.y * JKImageClipScreenScale;
+    
+    rect.size.width = rect.size.width > self.imageView.frame.size.width ? self.imageView.frame.size.width * JKImageClipScreenScale : rect.size.width * JKImageClipScreenScale;
+    rect.size.height = rect.size.height > self.imageView.frame.size.height ? self.imageView.frame.size.height * JKImageClipScreenScale : rect.size.height * JKImageClipScreenScale;
+    
+    if (rect.size.height != rect.size.width) {
+        
+        rect.size.width = MIN(rect.size.height, rect.size.width);
+        rect.size.height = rect.size.width;
+    }
     
     //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(image.size));
     //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
@@ -302,8 +332,12 @@
     
     UIImage *newImage = [UIImage imageWithCGImage:imageRef];
     
-    CGImageRelease(imageRef);
+    if (_isCircle) {
+        
+        newImage = [self jk_circleImage:newImage];
+    }
     
+    CGImageRelease(imageRef);
     
     if (self.autoSavaToAlbum) {
         UIImageWriteToSavedPhotosAlbum(newImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -313,16 +347,16 @@
     //
     //    //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(self.image.size));
     //
-    //    CGRect rect = CGRectMake(0, (JKScreenH - JKScreenW) * 0.5, JKScreenW, JKScreenW);
+    //    CGRect rect = CGRectMake(0, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW, JKImageClipScreenW);
     //
     //    CGRect convertRect = [self convertRect:rect toView:self.imageView];
     //    //NSLog(@"转换后范围--->%@", NSStringFromCGRect(convertRect));
     //
     //    convertRect = CGRectMake(
-    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKScreenScale,
-    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKScreenScale);
+    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
+    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKImageClipScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale);
     //    //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
     //
     //    CGImageRef imageRef = CGImageCreateWithImageInRect(self.image.CGImage, convertRect);
@@ -332,6 +366,31 @@
     //    CGImageRelease(imageRef);
     //
     //    return newImage;
+}
+
+- (UIImage *)jk_circleImage:(UIImage *)originalImage{
+    
+    //NO代表透明
+    UIGraphicsBeginImageContextWithOptions(originalImage.size, NO, 0.0);
+    
+    //获取上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    //添加一个圆
+    CGRect rect = CGRectMake(0, 0, originalImage.size.width, originalImage.size.height);
+    CGContextAddEllipseInRect(ctx, rect);
+    
+    //裁剪
+    CGContextClip(ctx);
+    
+    //将图片画上去
+    [originalImage drawInRect:rect];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
@@ -357,8 +416,8 @@
 
 - (void)setInset{
     // 计算内边距，注意只能使用frame
-    CGFloat offsetX = 0;//(JKScreenW - self.imageView.frame.size.width) * 0.5;
-    CGFloat offsetY = self.imageView.frame.size.height >= JKScreenW ? (JKScreenH - JKScreenW) * 0.5 : (JKScreenH - self.imageView.frame.size.height) * 0.5;//(JKScreenH - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetX = 0;//(JKImageClipScreenW - self.imageView.frame.size.width) * 0.5;
+    CGFloat offsetY = self.imageView.frame.size.height >= JKImageClipScreenW ? (JKImageClipScreenH - JKImageClipScreenW) * 0.5 : (JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;//(JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
     offsetX = (offsetX < 0) ? 0 : offsetX;
