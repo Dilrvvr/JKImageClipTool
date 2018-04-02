@@ -29,4 +29,5 @@ typedef enum : NSUInteger {
  * cancel : 点击取消的回调
  */
 + (void)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
+//(void(^)(void(^verifyAction)(void), void(^cancelAction)(void)))
 @end

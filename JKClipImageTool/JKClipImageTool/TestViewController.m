@@ -8,6 +8,7 @@
 
 #import "TestViewController.h"
 #import "JKImageClipTool.h"
+#import "ClipCircleViewController.h"
 
 @interface TestViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -52,7 +53,6 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     
     UILongPressGestureRecognizer *longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(saveImage:)];
@@ -154,15 +154,22 @@
     
     if (self.isClipCircle) {
         
-        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [picker dismissViewControllerAnimated:YES completion:^{
             
-            self.imageView.image = image;
+            ClipCircleViewController *vc = [[ClipCircleViewController alloc] init];
+            vc.pickImage = pickImage;
             
-        } cancel:^{
+            [vc setComplete:^(UIImage *image) {
+                
+                self.imageView.image = image;
+            }];
             
+            [vc setCancel:^{
+                
+            }];
+            
+            [self.navigationController pushViewController:vc animated:YES];
         }];
-        
-        [picker dismissViewControllerAnimated:YES completion:nil];
         
         return;
     }

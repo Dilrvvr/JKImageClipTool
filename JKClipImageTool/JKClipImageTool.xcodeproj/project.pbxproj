@@ -19,6 +19,7 @@
 		507FA1261EC9A2D70074D808 /* JKClipImageToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA1251EC9A2D70074D808 /* JKClipImageToolTests.m */; };
 		507FA1311EC9A2D70074D808 /* JKClipImageToolUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA1301EC9A2D70074D808 /* JKClipImageToolUITests.m */; };
 		507FA1401EC9A3140074D808 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FA13F1EC9A3140074D808 /* TestViewController.m */; };
+		50A29689207229B9008E75E2 /* ClipCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A29688207229B9008E75E2 /* ClipCircleViewController.m */; };
 		50CA14401F415449002766D2 /* JKFreeImageClipCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */; };
 		50CA14411F415449002766D2 /* JKFreeImageClipRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */; };
 		50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143B1F415449002766D2 /* JKFreeImageClipView.m */; };
@@ -67,6 +68,8 @@
 		507FA1321EC9A2D70074D808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507FA13E1EC9A3140074D808 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		507FA13F1EC9A3140074D808 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		50A29687207229B9008E75E2 /* ClipCircleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClipCircleViewController.h; sourceTree = "<group>"; };
+		50A29688207229B9008E75E2 /* ClipCircleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClipCircleViewController.m; sourceTree = "<group>"; };
 		50CA14361F415449002766D2 /* JKFreeImageClipCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipCoverView.h; sourceTree = "<group>"; };
 		50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipCoverView.m; sourceTree = "<group>"; };
 		50CA14381F415449002766D2 /* JKFreeImageClipRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipRectView.h; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				507FA1121EC9A2D70074D808 /* ViewController.m */,
 				507FA13E1EC9A3140074D808 /* TestViewController.h */,
 				507FA13F1EC9A3140074D808 /* TestViewController.m */,
+				50A29687207229B9008E75E2 /* ClipCircleViewController.h */,
+				50A29688207229B9008E75E2 /* ClipCircleViewController.m */,
 				5046F4741ECEE3B0003F9AC2 /* JKImageClip */,
 				505C22991ECC1F040047903D /* conan.PNG */,
 				505C22971ECC1EFE0047903D /* lizi.JPG */,
@@ -334,6 +339,7 @@
 			files = (
 				50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */,
 				507FA1131EC9A2D70074D808 /* ViewController.m in Sources */,
+				50A29689207229B9008E75E2 /* ClipCircleViewController.m in Sources */,
 				50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */,
 				50CA14411F415449002766D2 /* JKFreeImageClipRectView.m in Sources */,
 				507FA1101EC9A2D70074D808 /* AppDelegate.m in Sources */,

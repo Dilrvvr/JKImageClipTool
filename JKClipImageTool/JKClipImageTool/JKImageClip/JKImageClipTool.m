@@ -29,25 +29,25 @@
             
         case JKImageClipTypeJustShowImage:
         {
-            [JKFreeImageClipView showWithImage:image superView:nil complete:complete cancel:cancel];
+            [JKFreeImageClipView showWithImage:image superView:superView complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeSquare:
         {
-            [JKSqureImageClipView showWithImage:image superView:nil isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            [JKSqureImageClipView showWithImage:image superView:superView isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeCircle:
         {
-            [JKSqureImageClipView showWithImage:image superView:nil isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            [JKSqureImageClipView showWithImage:image superView:superView isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeFree:
         {
-            [JKFreeImageClipView showWithImage:image superView:nil autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            [JKFreeImageClipView showWithImage:image superView:superView autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
