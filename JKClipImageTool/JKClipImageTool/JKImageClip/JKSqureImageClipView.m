@@ -38,6 +38,9 @@
 /** 是否自动保存截图到相册 */
 @property (nonatomic, assign) BOOL autoSavaToAlbum;
 
+/** 是否传入了父试图 */
+@property (nonatomic, assign) BOOL isHaveSuperView;
+
 @end
 
 @implementation JKSqureImageClipView
@@ -49,7 +52,7 @@
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (void)showWithImage:(UIImage *)image isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (void)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     if (!image) {
         return;
     }
@@ -60,6 +63,15 @@
     icv.complete = complete;
     icv.cancel = cancel;
     icv.autoSavaToAlbum = autoSavaToAlbum;
+    
+    if (superView) {
+        
+        icv.isHaveSuperView = YES;
+        [superView addSubview:icv];
+        
+        return;
+    }
+    
     [[UIApplication sharedApplication].delegate.window addSubview:icv];
 }
 
@@ -182,6 +194,13 @@
 - (void)willMoveToSuperview:(UIView *)newSuperview{
     [super willMoveToSuperview:newSuperview];
     
+    if (self.isHaveSuperView) {
+        
+        self.frame = JKImageClipScreenBounds;
+        
+        return;
+    }
+    
     self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
     
     [UIView animateWithDuration:0.25 animations:^{
@@ -264,6 +283,15 @@
     
     self.userInteractionEnabled = NO;
     
+    if (self.isHaveSuperView) {
+        
+        !self.cancel ? : self.cancel();
+        
+        [self removeFromSuperview];
+        
+        return;
+    }
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
@@ -280,6 +308,15 @@
     }
     
     self.userInteractionEnabled = NO;
+    
+    if (self.isHaveSuperView) {
+        
+        !self.complete ? : self.complete([self clipImage]);
+        
+        [self removeFromSuperview];
+        
+        return;
+    }
     
     [UIView animateWithDuration:0.25 animations:^{
         

@@ -17,5 +17,5 @@
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (void)showWithImage:(UIImage *)image isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (void)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
 @end

@@ -58,6 +58,9 @@
 
 /** 是否自动保存截图到相册 */
 @property (nonatomic, assign) BOOL autoSavaToAlbum;
+
+/** 是否传入了父试图 */
+@property (nonatomic, assign) BOOL isHaveSuperView;
 @end
 
 // 通用间距
@@ -73,8 +76,9 @@ static BOOL isClip = YES;
  * image : 要裁剪的图片
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
+ * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (void)showWithImage:(UIImage *)image superView:(UIView *)superView autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     if (!image) {
         return;
     }
@@ -86,6 +90,15 @@ static BOOL isClip = YES;
     icv.complete = complete;
     icv.cancel = cancel;
     icv.autoSavaToAlbum = autoSavaToAlbum;
+    
+    if (superView) {
+        
+        icv.isHaveSuperView = YES;
+        [superView addSubview:icv];
+        
+        return;
+    }
+    
     [[UIApplication sharedApplication].delegate.window addSubview:icv];
 }
 
@@ -93,8 +106,9 @@ static BOOL isClip = YES;
  * 仅展示图片
  * image : 要展示的图片
  * complete : 点击确定的回调
+ * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (void)showWithImage:(UIImage *)image superView:(UIView *)superView complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     if (!image) {
         return;
     }
@@ -105,6 +119,15 @@ static BOOL isClip = YES;
     icv.image = image;
     icv.complete = complete;
     icv.cancel = cancel;
+    
+    if (superView) {
+        
+        icv.isHaveSuperView = YES;
+        [superView addSubview:icv];
+        
+        return;
+    }
+    
     [[UIApplication sharedApplication].delegate.window addSubview:icv];
 }
 
@@ -398,6 +421,14 @@ static BOOL isClip = YES;
     if (!newSuperview) {
         return;
     }
+    
+    if (self.isHaveSuperView) {
+        
+        self.frame = JKImageClipScreenBounds;
+        
+        return;
+    }
+    
     self.bottomView.userInteractionEnabled = NO;
     
     self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
@@ -529,6 +560,15 @@ static BOOL isClip = YES;
     
     self.userInteractionEnabled = NO;
     
+    if (self.isHaveSuperView) {
+        
+        !self.cancel ? : self.cancel();
+        
+        [self removeFromSuperview];
+        
+        return;
+    }
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
         
@@ -547,6 +587,15 @@ static BOOL isClip = YES;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     self.userInteractionEnabled = NO;
+    
+    if (self.isHaveSuperView) {
+        
+        !self.complete ? : self.complete(isClip ? [self clipImage] : self.image);
+        
+        [self removeFromSuperview];
+        
+        return;
+    }
     
     [UIView animateWithDuration:0.25 animations:^{
         self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);

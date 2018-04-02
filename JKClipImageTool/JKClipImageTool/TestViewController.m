@@ -154,7 +154,7 @@
     
     if (self.isClipCircle) {
         
-        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
@@ -169,7 +169,7 @@
     
     if (self.isClipSquare) {
         
-        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
@@ -179,7 +179,7 @@
         
     }else{
         
-        [JKImageClipTool showWithImage:pickImage imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
