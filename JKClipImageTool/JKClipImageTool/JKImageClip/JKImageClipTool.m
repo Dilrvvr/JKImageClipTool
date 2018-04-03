@@ -11,6 +11,10 @@
 #import "JKSqureImageClipView.h"
 #import "JKFreeImageClipView.h"
 
+static JKSqureImageClipView *squreView_;
+
+static JKFreeImageClipView *freeView_;
+
 @implementation JKImageClipTool
 
 /**
@@ -54,5 +58,29 @@
         default:
             break;
     }
+}
+
+
+
++ (void)hideBottomView{
+    
+    [squreView_ hideBottomView];
+    [freeView_ hideBottomView];
+}
+
++ (void)setTopInset:(CGFloat)topInset{
+    
+}
+
++ (void)cancelButtonClick{
+    
+    [squreView_ cancelButtonClick];
+    [freeView_ cancelButtonClick];
+}
+
++ (void)verifyButtonClick{
+    
+    [squreView_ verifyButtonClick];
+    [freeView_ verifyButtonClick];
 }
 @end

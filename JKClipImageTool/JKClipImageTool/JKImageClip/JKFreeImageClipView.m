@@ -12,6 +12,7 @@
 #import "JKImageClipToolMacro.h"
 
 #define JKFreeImageClipViewTopMinInset (JKFreeImageClipViewIsIphoneX ? 54 : 30)
+#define JKFreeImageClipViewBottomViewH (JKFreeImageClipViewIsIphoneX ? 94 : 60)
 
 @interface JKFreeImageClipView () <UIScrollViewDelegate>
 {
@@ -78,9 +79,10 @@ static BOOL isClip = YES;
  * complete : 截图完成的回调
  * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image superView:(UIView *)superView autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
+    
     if (!image) {
-        return;
+        return nil;
     }
     
     isClip = YES;
@@ -96,10 +98,12 @@ static BOOL isClip = YES;
         icv.isHaveSuperView = YES;
         [superView addSubview:icv];
         
-        return;
+    }else{
+        
+        [[UIApplication sharedApplication].delegate.window addSubview:icv];
     }
     
-    [[UIApplication sharedApplication].delegate.window addSubview:icv];
+    return icv;
 }
 
 /**
@@ -108,9 +112,10 @@ static BOOL isClip = YES;
  * complete : 点击确定的回调
  * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image superView:(UIView *)superView complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
+    
     if (!image) {
-        return;
+        return nil;
     }
     
     isClip = NO;
@@ -125,10 +130,12 @@ static BOOL isClip = YES;
         icv.isHaveSuperView = YES;
         [superView addSubview:icv];
         
-        return;
+    }else{
+        
+        [[UIApplication sharedApplication].delegate.window addSubview:icv];
     }
     
-    [[UIApplication sharedApplication].delegate.window addSubview:icv];
+    return icv;
 }
 
 #pragma mark - 懒加载
@@ -608,6 +615,11 @@ static BOOL isClip = YES;
     }];
 }
 
+- (void)hideBottomView{
+    
+    self.bottomView.hidden = YES;
+}
+
 - (UIImage *)clipImage{
     //    if (self.imageView.frame.size.height < JKImageClipScreenW) {
     
@@ -716,6 +728,8 @@ static BOOL isClip = YES;
 }
 
 - (void)dealloc{
-    //NSLog(@"%d, %s",__LINE__, __func__);
+#ifdef DEBUG
+    NSLog(@"%d, %s",__LINE__, __func__);
+#endif
 }
 @end

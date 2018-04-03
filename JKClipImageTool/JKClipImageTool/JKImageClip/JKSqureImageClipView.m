@@ -52,9 +52,10 @@
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (void)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
+    
     if (!image) {
-        return;
+        return nil;
     }
     
     JKSqureImageClipView *icv = [[JKSqureImageClipView alloc] init];
@@ -69,10 +70,12 @@
         icv.isHaveSuperView = YES;
         [superView addSubview:icv];
         
-        return;
+    }else{
+        
+        [[UIApplication sharedApplication].delegate.window addSubview:icv];
     }
     
-    [[UIApplication sharedApplication].delegate.window addSubview:icv];
+    return icv;
 }
 
 - (CAShapeLayer *)shapeLayer{
@@ -169,7 +172,7 @@
 
 - (void)setupBottomView{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - JKFreeImageClipViewBottomViewH, JKImageClipScreenW, JKFreeImageClipViewBottomViewH)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - (JKFreeImageClipViewIsIphoneX ? 94 : 60), JKImageClipScreenW, (JKFreeImageClipViewIsIphoneX ? 94 : 60))];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
     [self addSubview:bottomView];
     self.bottomView = bottomView;
@@ -330,6 +333,11 @@
     }];
 }
 
+- (void)hideBottomView{
+    
+    self.bottomView.hidden = YES;
+}
+
 - (UIImage *)clipImage{
     //    if (self.imageView.frame.size.height < JKImageClipScreenW) {
     
@@ -464,6 +472,8 @@
 }
 
 - (void)dealloc{
+#ifdef DEBUG
     NSLog(@"%d, %s",__LINE__, __func__);
+#endif
 }
 @end

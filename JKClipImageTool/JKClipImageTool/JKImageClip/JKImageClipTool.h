@@ -30,4 +30,10 @@ typedef enum : NSUInteger {
  */
 + (void)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
 //(void(^)(void(^verifyAction)(void), void(^cancelAction)(void)))
+
++ (void)hideBottomView;
++ (void)setTopInset:(CGFloat)topInset;
+
++ (void)cancelButtonClick;
++ (void)verifyButtonClick;
 @end

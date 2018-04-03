@@ -16,7 +16,6 @@
 #define JKImageClipScreenBounds [UIScreen mainScreen].bounds
 #define JKImageClipScreenScale ([UIScreen mainScreen].scale)
 #define JKFreeImageClipViewIsIphoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
-#define JKFreeImageClipViewBottomViewH (JKFreeImageClipViewIsIphoneX ? 94 : 60)
 
 
 
