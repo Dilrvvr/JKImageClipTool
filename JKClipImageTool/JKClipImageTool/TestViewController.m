@@ -83,6 +83,7 @@
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    
     if (error) {
         return;
     }
@@ -91,22 +92,24 @@
     self.tipLabel.hidden = NO;
     
     [UIView animateWithDuration:0.5 animations:^{
+        
         self.tipLabel.alpha = 1;
         
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:0.5 delay:0.5 usingSpringWithDamping:0 initialSpringVelocity:0 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+            
             self.tipLabel.alpha = 0;
             
         } completion:^(BOOL finished) {
             
             self.tipLabel.hidden = YES;
-            
         }];
     }];
 }
 
 - (void)pictureAlert{
+    
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
     
     UIAlertAction *actionTakePhoto = [UIAlertAction actionWithTitle:@"拍照" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {

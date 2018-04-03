@@ -7,13 +7,9 @@
 //  正方形图片裁剪
 
 #import <UIKit/UIKit.h>
+#import "JKImageClipActionProtocol.h"
 
-@interface JKSqureImageClipView : UIView
-
-
-- (void)hideBottomView;
-- (void)cancelButtonClick;
-- (void)verifyButtonClick;
+@interface JKSqureImageClipView : UIView <JKImageClipActionProtocol>
 
 /**
  * 裁剪正方形图片

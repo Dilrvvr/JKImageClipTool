@@ -46,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		501FE62D2073492100B868B9 /* JKImageClipActionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKImageClipActionProtocol.h; sourceTree = "<group>"; };
 		505C22951ECC115F0047903D /* IMG_0049.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0049.JPG; sourceTree = "<group>"; };
 		505C22971ECC1EFE0047903D /* lizi.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lizi.JPG; sourceTree = "<group>"; };
 		505C22991ECC1F040047903D /* conan.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conan.PNG; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 				50CA143C1F415449002766D2 /* JKImageClipTool.h */,
 				50CA143D1F415449002766D2 /* JKImageClipTool.m */,
 				5069C2FC201F0EB7004116AE /* JKImageClipToolMacro.h */,
+				501FE62D2073492100B868B9 /* JKImageClipActionProtocol.h */,
 				50CA143E1F415449002766D2 /* JKSqureImageClipView.h */,
 				50CA143F1F415449002766D2 /* JKSqureImageClipView.m */,
 			);

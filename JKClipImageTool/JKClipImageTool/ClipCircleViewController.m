@@ -10,7 +10,8 @@
 #import "JKImageClipTool.h"
 
 @interface ClipCircleViewController ()
-
+/** clipView */
+@property (nonatomic, weak) id<JKImageClipActionProtocol> clipView;
 @end
 
 @implementation ClipCircleViewController
@@ -32,10 +33,25 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"圆形裁剪";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:(UIBarButtonItemStylePlain) target:self action:@selector(cancelAction)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:(UIBarButtonItemStylePlain) target:self action:@selector(verifyAction)];
     
     __weak typeof(self) weakSelf = self;
     
-    [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
+//    [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeFreeWithNavBar) autoSavaToAlbum:NO complete:^(UIImage *image) {
+//
+//        [weakSelf.navigationController popViewControllerAnimated:YES];
+//
+//        !weakSelf.complete ? : weakSelf.complete(image);
+//
+//    } cancel:^{
+//
+//        [weakSelf.navigationController popViewControllerAnimated:YES];
+//
+//        !weakSelf.cancel ? : weakSelf.cancel();
+//    }];
+    
+    _clipView = [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
@@ -47,9 +63,22 @@
         
         !weakSelf.cancel ? : weakSelf.cancel();
     }];
+    
+    [_clipView hideBottomView];
+}
+
+- (void)cancelAction{
+    
+    [_clipView cancelButtonClick];
+}
+
+- (void)verifyAction{
+    
+    [_clipView verifyButtonClick];
 }
 
 - (void)dealloc{
+//    _clipView = nil;
     NSLog(@"%s", __func__);
 }
 

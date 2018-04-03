@@ -11,10 +11,6 @@
 #import "JKSqureImageClipView.h"
 #import "JKFreeImageClipView.h"
 
-static JKSqureImageClipView *squreView_;
-
-static JKFreeImageClipView *freeView_;
-
 @implementation JKImageClipTool
 
 /**
@@ -27,60 +23,48 @@ static JKFreeImageClipView *freeView_;
  * complete : 截图完成的回调
  * cancel : 点击取消的回调
  */
-+ (void)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
     switch (imageClipType) {
             
         case JKImageClipTypeJustShowImage:
         {
-            [JKFreeImageClipView showWithImage:image superView:superView complete:complete cancel:cancel];
+            return [JKFreeImageClipView showWithImage:image superView:superView isHaveNavBar:NO complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeSquare:
         {
-            [JKSqureImageClipView showWithImage:image superView:superView isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            return [JKSqureImageClipView showWithImage:image superView:superView isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeCircle:
         {
-            [JKSqureImageClipView showWithImage:image superView:superView isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            return [JKSqureImageClipView showWithImage:image superView:superView isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
         case JKImageClipTypeFree:
         {
-            [JKFreeImageClipView showWithImage:image superView:superView autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            return [JKFreeImageClipView showWithImage:image superView:superView isHaveNavBar:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+        }
+            break;
+            
+        case JKImageClipTypeJustShowImageWithNavBar:
+        {
+            return [JKFreeImageClipView showWithImage:image superView:superView isHaveNavBar:YES complete:complete cancel:cancel];
+        }
+            break;
+            
+        case JKImageClipTypeFreeWithNavBar:
+        {
+            return [JKFreeImageClipView showWithImage:image superView:superView isHaveNavBar:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
         default:
             break;
     }
-}
-
-
-
-+ (void)hideBottomView{
-    
-    [squreView_ hideBottomView];
-    [freeView_ hideBottomView];
-}
-
-+ (void)setTopInset:(CGFloat)topInset{
-    
-}
-
-+ (void)cancelButtonClick{
-    
-    [squreView_ cancelButtonClick];
-    [freeView_ cancelButtonClick];
-}
-
-+ (void)verifyButtonClick{
-    
-    [squreView_ verifyButtonClick];
-    [freeView_ verifyButtonClick];
 }
 @end

@@ -204,10 +204,17 @@
         return;
     }
     
+    self.bottomView.userInteractionEnabled = NO;
+    
     self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
     
     [UIView animateWithDuration:0.25 animations:^{
         self.frame = JKImageClipScreenBounds;
+        
+    } completion:^(BOOL finished) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
+        self.bottomView.userInteractionEnabled = YES;
     }];
 }
 

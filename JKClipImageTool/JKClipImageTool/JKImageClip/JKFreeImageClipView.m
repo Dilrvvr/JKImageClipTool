@@ -11,8 +11,8 @@
 #import "JKFreeImageClipRectView.h"
 #import "JKImageClipToolMacro.h"
 
-#define JKFreeImageClipViewTopMinInset (JKFreeImageClipViewIsIphoneX ? 54 : 30)
-#define JKFreeImageClipViewBottomViewH (JKFreeImageClipViewIsIphoneX ? 94 : 60)
+//#define JKFreeImageClipViewTopMinInset (JKFreeImageClipViewIsIphoneX ? 54 : 30)
+//#define JKFreeImageClipViewBottomViewH (JKFreeImageClipViewIsIphoneX ? 94 : 60)
 
 @interface JKFreeImageClipView () <UIScrollViewDelegate>
 {
@@ -62,11 +62,15 @@
 
 /** 是否传入了父试图 */
 @property (nonatomic, assign) BOOL isHaveSuperView;
+
+/** 是否有导航条 */
+@property (nonatomic, assign) BOOL isHaveNavBar;
 @end
 
 // 通用间距
 static CGFloat const commonMargin_ = 20;
-
+static CGFloat JKFreeImageClipViewTopMinInset = 0;
+static CGFloat JKFreeImageClipViewBottomViewH = 0;
 
 @implementation JKFreeImageClipView
 
@@ -75,14 +79,25 @@ static BOOL isClip = YES;
 /**
  * 自由裁剪图片
  * image : 要裁剪的图片
+ * superView : 父视图
+ * isHaveNavBar : 是否有导航条，注意必须有父视图，这里才有效，设为YES则会隐藏底部确定取消按钮
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  * cancel : 点击取消的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
     if (!image) {
         return nil;
+    }
+    
+    JKFreeImageClipViewTopMinInset = (JKFreeImageClipViewIsIphoneX ? 54 : 30);
+    JKFreeImageClipViewBottomViewH = (JKFreeImageClipViewIsIphoneX ? 94 : 60);
+    
+    if (superView && isHaveNavBar) {
+        
+        JKFreeImageClipViewTopMinInset = (JKFreeImageClipViewIsIphoneX ? 98 : 78);
+        JKFreeImageClipViewBottomViewH = (JKFreeImageClipViewIsIphoneX ? 34 : 0);
     }
     
     isClip = YES;
@@ -112,10 +127,22 @@ static BOOL isClip = YES;
  * complete : 点击确定的回调
  * cancel : 点击取消的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
+    
+    //#define JKFreeImageClipViewTopMinInset (JKFreeImageClipViewIsIphoneX ? 54 : 30)
+    //#define JKFreeImageClipViewBottomViewH (JKFreeImageClipViewIsIphoneX ? 94 : 60)
     
     if (!image) {
         return nil;
+    }
+    
+    JKFreeImageClipViewTopMinInset = (JKFreeImageClipViewIsIphoneX ? 54 : 30);
+    JKFreeImageClipViewBottomViewH = (JKFreeImageClipViewIsIphoneX ? 94 : 60);
+    
+    if (superView && isHaveNavBar) {
+        
+        JKFreeImageClipViewTopMinInset = (JKFreeImageClipViewIsIphoneX ? 98 : 78);
+        JKFreeImageClipViewBottomViewH = (JKFreeImageClipViewIsIphoneX ? 34 : 0);
     }
     
     isClip = NO;
@@ -238,6 +265,10 @@ static BOOL isClip = YES;
 }
 
 - (void)setupBottomView{
+    
+    if (JKFreeImageClipViewBottomViewH <= 34) {
+        return;
+    }
     
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - 60 - (JKFreeImageClipViewIsIphoneX ? 34 : 0), JKImageClipScreenW, 60 + (JKFreeImageClipViewIsIphoneX ? 34 : 0))];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
@@ -441,7 +472,13 @@ static BOOL isClip = YES;
     self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
     
     [UIView animateWithDuration:0.25 animations:^{
+        
         self.frame = JKImageClipScreenBounds;
+        
+    } completion:^(BOOL finished) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
+        self.bottomView.userInteractionEnabled = YES;
     }];
 }
 
@@ -453,7 +490,6 @@ static BOOL isClip = YES;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
 //        rect.origin.x = -self.scrollView.contentOffset.x;
 //        rect.origin.y = -self.scrollView.contentOffset.y;
@@ -467,7 +503,6 @@ static BOOL isClip = YES;
         } completion:^(BOOL finished) {
             self.coverView.frame = JKImageClipScreenBounds;
             self.coverView.transparentRect = self.rectView.frame;
-            self.bottomView.userInteractionEnabled = YES;
         }];
         
     });
@@ -563,7 +598,7 @@ static BOOL isClip = YES;
         return;
     }
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     
     self.userInteractionEnabled = NO;
     
@@ -591,7 +626,7 @@ static BOOL isClip = YES;
         return;
     }
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     
     self.userInteractionEnabled = NO;
     
