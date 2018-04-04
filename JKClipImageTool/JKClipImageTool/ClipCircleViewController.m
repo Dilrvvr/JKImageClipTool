@@ -65,6 +65,7 @@
     }];
     
     [_clipView hideBottomView];
+    [_clipView enableDeallocLog];
 }
 
 - (void)cancelAction{
