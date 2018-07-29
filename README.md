@@ -3,18 +3,18 @@
 
 
 
-plain带textField样式  
+方形裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Example/Snapshots/plain.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/square.PNG" width="375"><br/>
 
-actionSheet样式  
+圆形裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Example/Snapshots/actionSheet.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/circle.PNG" width="375"><br/>
 
-collectionSheet样式  
+按比例裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Example/Snapshots/collectionSheet.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/scale.PNG" width="375"><br/>
 
-HUD样式  
+自由裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Example/Snapshots/HUD.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/free.PNG" width="375"><br/>
