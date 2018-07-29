@@ -5,16 +5,16 @@
 
 方形裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/square.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKImageClipTool/master/Snapshots/square.PNG" width="375"><br/>
 
 圆形裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/circle.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKImageClipTool/master/Snapshots/circle.PNG" width="375"><br/>
 
 按比例裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/scale.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKImageClipTool/master/Snapshots/scale.PNG" width="375"><br/>
 
 自由裁剪  
 
-<img src="https://raw.github.com/Jacky-An/JKAlertX/master/Snapshots/free.PNG" width="375"><br/>
+<img src="https://raw.github.com/Jacky-An/JKImageClipTool/master/Snapshots/free.PNG" width="375"><br/>
