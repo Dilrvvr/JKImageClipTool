@@ -478,7 +478,6 @@ static BOOL isClip = YES;
         
     } completion:^(BOOL finished) {
         
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
         self.bottomView.userInteractionEnabled = YES;
     }];
 }
@@ -599,8 +598,6 @@ static BOOL isClip = YES;
         return;
     }
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
-    
     self.userInteractionEnabled = NO;
     
     if (self.isHaveSuperView) {
@@ -626,8 +623,6 @@ static BOOL isClip = YES;
     if (self.scrollView.isDragging || self.scrollView.isDecelerating || self.scrollView.isZooming || isPanning) {
         return;
     }
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     
     self.userInteractionEnabled = NO;
     

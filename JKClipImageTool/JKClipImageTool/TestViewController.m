@@ -20,15 +20,18 @@
 
 /** 是否裁剪为圆形*/
 @property (nonatomic, assign) BOOL isClipCircle;
+
+/** 是否按比例裁剪*/
+@property (nonatomic, assign) BOOL isCropScale;
 @end
 
 @implementation TestViewController
 
 - (IBAction)clip:(id)sender {
     
-    self.isClipCircle = NO;
-    
     self.isClipSquare = YES;
+    self.isClipCircle = NO;
+    self.isCropScale  = NO;
     
     [self pictureAlert];
 }
@@ -36,8 +39,8 @@
 - (IBAction)freeClip:(id)sender {
     
     self.isClipCircle = NO;
-    
     self.isClipSquare = NO;
+    self.isCropScale  = NO;
     
     [self pictureAlert];
 }
@@ -45,6 +48,16 @@
 - (IBAction)circleClip:(id)sender {
     
     self.isClipCircle = YES;
+    self.isCropScale  = NO;
+    
+    [self pictureAlert];
+}
+
+- (IBAction)cropScale:(id)sender {
+    
+    self.isCropScale  = YES;
+    self.isClipSquare = NO;
+    self.isClipCircle = NO;
     
     [self pictureAlert];
 }
@@ -177,7 +190,17 @@
         return;
     }
     
-    if (self.isClipSquare) {
+    if (self.isCropScale) {
+        
+        [JKImageClipTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(414, 736) autoSavaToAlbum:NO complete:^(UIImage *image) {
+            
+            self.imageView.image = image;
+            
+        } cancel:^{
+            
+        }];
+        
+    }else if (self.isClipSquare) {
         
         [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
             

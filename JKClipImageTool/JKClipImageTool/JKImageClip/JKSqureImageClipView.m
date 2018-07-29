@@ -12,6 +12,7 @@
 @interface JKSqureImageClipView () <UICollectionViewDelegate>
 {
     BOOL _enableDeallocLog;
+    CGFloat maxH;
 }
 /** scrollView */
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -43,6 +44,8 @@
 /** 是否传入了父试图 */
 @property (nonatomic, assign) BOOL isHaveSuperView;
 
+/** 宽高比 */
+@property (nonatomic, assign) CGSize cropSize;
 @end
 
 @implementation JKSqureImageClipView
@@ -62,10 +65,50 @@
     
     JKSqureImageClipView *icv = [[JKSqureImageClipView alloc] init];
     icv.isCircle = isCircle;
-    icv.image = image;
     icv.complete = complete;
     icv.cancel = cancel;
     icv.autoSavaToAlbum = autoSavaToAlbum;
+    
+    CGFloat WH = MIN(JKImageClipScreenW, JKImageClipScreenH);
+    
+    icv->_cropSize = CGSizeMake(WH, WH);
+    icv.image = image;
+    
+    if (superView) {
+        
+        icv.isHaveSuperView = YES;
+        [superView addSubview:icv];
+        
+    }else{
+        
+        [[UIApplication sharedApplication].delegate.window addSubview:icv];
+    }
+    
+    return icv;
+}
+
+/**
+ * 裁剪正方形图片
+ * image : 要裁剪的图片
+ * cropSize : 要裁剪的宽高比
+ * autoSavaToAlbum : 是否自动将截图保存到相册
+ * complete : 截图完成的回调
+ */
++ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView cropSize:(CGSize)cropSize autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
+    
+    if (!image || cropSize.width <= 0 || cropSize.height <= 0) {
+        return nil;
+    }
+    
+    JKSqureImageClipView *icv = [[JKSqureImageClipView alloc] init];
+    icv.isCircle = NO;
+    icv.complete = complete;
+    icv.cancel = cancel;
+    icv.autoSavaToAlbum = autoSavaToAlbum;
+    
+    icv.cropSize = cropSize;
+    
+    icv.image = image;
     
     if (superView) {
         
@@ -99,7 +142,9 @@
             
         }else{
             
-            path = [UIBezierPath bezierPathWithRect:CGRectMake(1, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW - 2, JKImageClipScreenW)];
+            CGFloat screenW = MIN(JKImageClipScreenW, JKImageClipScreenH);
+            
+            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.cropSize.width) * 0.5 + 1, (JKFreeImageClipViewIsIphoneX ? 100 : 66) + (maxH - self.cropSize.height) * 0.5, self.cropSize.width - 2, self.cropSize.height)];
         }
         
         [fullPath appendPath:path];
@@ -131,6 +176,10 @@
     self.frame = JKImageClipScreenBounds;
     
     [self setExclusiveTouch:YES];
+    
+    CGFloat screenH = MAX(JKImageClipScreenW, JKImageClipScreenH);
+    
+    maxH = (JKFreeImageClipViewIsIphoneX ? screenH - 100 - 100 : screenH - 66 - 66);
     
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.delegate = self;
@@ -199,6 +248,13 @@
 - (void)willMoveToSuperview:(UIView *)newSuperview{
     [super willMoveToSuperview:newSuperview];
     
+    if (newSuperview == nil) {
+        return;
+    }
+    
+    [self shapeLayer];
+    [self calculateImageViewSize];
+    
     if (self.isHaveSuperView) {
         
         self.frame = JKImageClipScreenBounds;
@@ -215,7 +271,6 @@
         
     } completion:^(BOOL finished) {
         
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
         self.bottomView.userInteractionEnabled = YES;
     }];
 }
@@ -237,34 +292,43 @@
     
     _image = image;
     
-    [self calculateImageViewSize];
     self.imageView.image = image;
+}
+
+- (void)setCropSize:(CGSize)cropSize{
     
-    [self shapeLayer];
+    CGFloat W = cropSize.width;
+    CGFloat H = cropSize.height;
+    CGFloat scale = W / H;
+    
+    CGFloat screenW = MIN(JKImageClipScreenW, JKImageClipScreenH);
+    
+    W = screenW;
+    H = W / scale;
+    
+    if (H > maxH) {
+        
+        H = maxH;
+        W = H * scale;
+    }
+    
+    _cropSize = CGSizeMake(W, H);
 }
 
 - (void)calculateImageViewSize{
-    //图片要显示的尺寸
-    CGFloat pictureW = JKImageClipScreenW;
-    CGFloat pictureH = JKImageClipScreenW * self.image.size.height / self.image.size.width;
     
-    if (pictureH > JKImageClipScreenH) {//图片高过屏幕
-        self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
-        //设置scrollView的contentSize
-        //        self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
-        //        //NSLog(@"更新了contentSize");
-        
-    }else{//图片不高于屏幕
-        self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);//CGSizeMake(pictureW, pictureH);
-        //图片显示在中间
-        //        self.imageView.center= CGPointMake(JKImageClipScreenW * 0.5, JKImageClipScreenH * 0.5);
-    }
+    //图片要显示的尺寸
+    CGFloat pictureW = self.cropSize.width;
+    CGFloat pictureH = self.cropSize.width * self.image.size.height / self.image.size.width;
+    
+    self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
+    
     //设置scrollView的contentSize
     self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
     
     [self setInset];
     
-    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - JKImageClipScreenW) * 0.5);
+    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - self.cropSize.height) * 0.5);
 }
 
 #pragma mark - 点击事件
@@ -363,7 +427,7 @@
     
     UIGraphicsEndImageContext();
     
-    CGRect rect1 = CGRectMake(0, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW, JKImageClipScreenW);//CGRectMake(0, (image.size.height - image.size.width) * JKImageClipScreenScale * 0.5, image.size.width * JKImageClipScreenScale, image.size.width * JKImageClipScreenScale);
+    CGRect rect1 = CGRectMake((JKImageClipScreenW - self.cropSize.width) * 0.5, (JKImageClipScreenH - self.cropSize.height) * 0.5, self.cropSize.width, self.cropSize.height);
     
     CGRect rect = [self convertRect:rect1 toView:self.imageView];
     
@@ -373,11 +437,12 @@
     rect.size.width = rect.size.width > self.imageView.frame.size.width ? self.imageView.frame.size.width * JKImageClipScreenScale : rect.size.width * JKImageClipScreenScale;
     rect.size.height = rect.size.height > self.imageView.frame.size.height ? self.imageView.frame.size.height * JKImageClipScreenScale : rect.size.height * JKImageClipScreenScale;
     
+    /*
     if (rect.size.height != rect.size.width) {
         
         rect.size.width = MIN(rect.size.height, rect.size.width);
         rect.size.height = rect.size.width;
-    }
+    } */
     
     //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(image.size));
     //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
@@ -470,8 +535,8 @@
 
 - (void)setInset{
     // 计算内边距，注意只能使用frame
-    CGFloat offsetX = 0;//(JKImageClipScreenW - self.imageView.frame.size.width) * 0.5;
-    CGFloat offsetY = self.imageView.frame.size.height >= JKImageClipScreenW ? (JKImageClipScreenH - JKImageClipScreenW) * 0.5 : (JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;//(JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetX = (JKImageClipScreenW - (self.cropSize.width)) * 0.5;
+    CGFloat offsetY = self.imageView.frame.size.height >= self.cropSize.height ? (JKImageClipScreenH - (self.cropSize.height)) * 0.5 : (JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;//(JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
     offsetX = (offsetX < 0) ? 0 : offsetX;
