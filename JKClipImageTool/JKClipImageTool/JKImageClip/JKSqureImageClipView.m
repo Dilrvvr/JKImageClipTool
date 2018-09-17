@@ -321,6 +321,13 @@
     CGFloat pictureW = self.cropSize.width;
     CGFloat pictureH = self.cropSize.width * self.image.size.height / self.image.size.width;
     
+    if (pictureH < self.cropSize.height) {
+        
+        pictureW = pictureW * self.cropSize.height / pictureH;
+        
+        pictureH = self.cropSize.height;
+    }
+    
     self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
     
     //设置scrollView的contentSize
@@ -342,7 +349,7 @@
     }
     
     // 双击缩小
-    if (self.imageView.frame.size.width > JKImageClipScreenW) {
+    if (self.scrollView.zoomScale != 1) {
         [self.scrollView setZoomScale:1 animated:YES];
         
         return;
