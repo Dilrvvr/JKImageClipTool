@@ -1,15 +1,15 @@
 //
-//  JKSqureImageClipView.m
+//  JKClipImageSquareTypeView.m
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/17.
 //  Copyright © 2017年 安永博. All rights reserved.
 //
 
-#import "JKSqureImageClipView.h"
+#import "JKClipImageSquareTypeView.h"
 #import "JKClipImageConst.h"
 
-@interface JKSqureImageClipView () <UICollectionViewDelegate>
+@interface JKClipImageSquareTypeView () <UICollectionViewDelegate>
 {
     CGFloat maxH;
 }
@@ -30,7 +30,7 @@
 @property (nonatomic, assign) CGSize cropSize;
 @end
 
-@implementation JKSqureImageClipView
+@implementation JKClipImageSquareTypeView
 
 /**
  * 裁剪正方形图片
@@ -51,7 +51,7 @@
     
     if (!targetImage) { return nil; }
     
-    JKSqureImageClipView *icv = [[JKSqureImageClipView alloc] init];
+    JKClipImageSquareTypeView *icv = [[JKClipImageSquareTypeView alloc] init];
     icv.image = targetImage;
     icv.cropSize = clipSize;
     icv.isCircle = isCircle;

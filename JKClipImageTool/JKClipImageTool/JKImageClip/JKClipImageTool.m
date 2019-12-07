@@ -8,7 +8,7 @@
 
 #import "JKClipImageTool.h"
 
-#import "JKSqureImageClipView.h"
+#import "JKClipImageSquareTypeView.h"
 #import "JKClipImageFreeTypeView.h"
 
 @implementation JKClipImageTool
@@ -35,13 +35,13 @@
             
         case JKClipImageTypeSquare:
         {
-            return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageSquareTypeView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
         case JKClipImageTypeCircle:
         {
-            return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageSquareTypeView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
@@ -82,6 +82,6 @@
  */
 + (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image superView:(UIView *)superView cropSize:(CGSize)cropSize autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
-    return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:cropSize isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
+    return [JKClipImageSquareTypeView showWithSuperView:superView targetImage:image clipSize:cropSize isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
 }
 @end

@@ -1,5 +1,5 @@
 //
-//  JKSqureImageClipView.h
+//  JKClipImageSquareTypeView.h
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/17.
@@ -8,7 +8,7 @@
 
 #import "JKClipImageBaseView.h"
 
-@interface JKSqureImageClipView : JKClipImageBaseView <JKImageClipActionProtocol>
+@interface JKClipImageSquareTypeView : JKClipImageBaseView <JKImageClipActionProtocol>
 
 /**
  * 裁剪正方形图片
