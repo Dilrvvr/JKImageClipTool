@@ -7,7 +7,7 @@
 //  正方形图片裁剪
 
 #import <UIKit/UIKit.h>
-#import "JKImageClipActionProtocol.h"
+#import "JKClipImageConst.h"
 
 @interface JKSqureImageClipView : UIView <JKImageClipActionProtocol>
 

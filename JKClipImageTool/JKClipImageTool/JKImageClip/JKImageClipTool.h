@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JKImageClipActionProtocol.h"
+#import "JKClipImageConst.h"
 
 typedef enum : NSUInteger {
     

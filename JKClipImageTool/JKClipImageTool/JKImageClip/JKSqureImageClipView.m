@@ -7,7 +7,7 @@
 //
 
 #import "JKSqureImageClipView.h"
-#import "JKImageClipToolMacro.h"
+#import "JKClipImageConst.h"
 
 @interface JKSqureImageClipView () <UICollectionViewDelegate>
 {
@@ -69,7 +69,7 @@
     icv.cancel = cancel;
     icv.autoSavaToAlbum = autoSavaToAlbum;
     
-    CGFloat WH = MIN(JKImageClipScreenW, JKImageClipScreenH);
+    CGFloat WH = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
     
     icv->_cropSize = CGSizeMake(WH, WH);
     icv.image = image;
@@ -131,20 +131,20 @@
         //        _shapeLayer.lineWidth = 1;
         _shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
         //        _shapeLayer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
-        _shapeLayer.frame = JKImageClipScreenBounds;
-        UIBezierPath *fullPath = [UIBezierPath bezierPathWithRect:CGRectMake(-1, -1, JKImageClipScreenW + 2, JKImageClipScreenH + 2)];
+        _shapeLayer.frame = JKClipImageScreenBounds;
+        UIBezierPath *fullPath = [UIBezierPath bezierPathWithRect:CGRectMake(-1, -1, JKClipImageScreenWidth + 2, JKClipImageScreenHeight + 2)];
         
         UIBezierPath *path = nil;
         
         if (_isCircle) {
             
-            path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(1, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW - 2, JKImageClipScreenW) cornerRadius:(JKImageClipScreenW - 2) * 0.5];
+            path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(1, (JKClipImageScreenHeight - JKClipImageScreenWidth) * 0.5, JKClipImageScreenWidth - 2, JKClipImageScreenWidth) cornerRadius:(JKClipImageScreenWidth - 2) * 0.5];
             
         }else{
             
-            CGFloat screenW = MIN(JKImageClipScreenW, JKImageClipScreenH);
+            CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
             
-            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.cropSize.width) * 0.5 + 1, (JKFreeImageClipViewIsIphoneX ? 100 : 66) + (maxH - self.cropSize.height) * 0.5, self.cropSize.width - 2, self.cropSize.height)];
+            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.cropSize.width) * 0.5 + 1, (JKClipImageIsDeviceX() ? 100 : 66) + (maxH - self.cropSize.height) * 0.5, self.cropSize.width - 2, self.cropSize.height)];
         }
         
         [fullPath appendPath:path];
@@ -173,13 +173,13 @@
 
 - (void)initialization{
     self.backgroundColor = [UIColor blackColor];
-    self.frame = JKImageClipScreenBounds;
+    self.frame = JKClipImageScreenBounds;
     
     [self setExclusiveTouch:YES];
     
-    CGFloat screenH = MAX(JKImageClipScreenW, JKImageClipScreenH);
+    CGFloat screenH = MAX(JKClipImageScreenWidth, JKClipImageScreenHeight);
     
-    maxH = (JKFreeImageClipViewIsIphoneX ? screenH - 100 - 100 : screenH - 66 - 66);
+    maxH = (JKClipImageIsDeviceX() ? screenH - 100 - 100 : screenH - 66 - 66);
     
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.delegate = self;
@@ -223,7 +223,7 @@
 
 - (void)setupBottomView{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKImageClipScreenH - (JKFreeImageClipViewIsIphoneX ? 94 : 60), JKImageClipScreenW, (JKFreeImageClipViewIsIphoneX ? 94 : 60))];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKClipImageScreenHeight - (JKClipImageIsDeviceX() ? 94 : 60), JKClipImageScreenWidth, (JKClipImageIsDeviceX() ? 94 : 60))];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
     [self addSubview:bottomView];
     self.bottomView = bottomView;
@@ -239,7 +239,7 @@
     UIButton *verifyButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [verifyButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [verifyButton setTitle:@"确定" forState:(UIControlStateNormal)];
-    verifyButton.frame = CGRectMake(JKImageClipScreenW - 90, 0, 90, 60);
+    verifyButton.frame = CGRectMake(JKClipImageScreenWidth - 90, 0, 90, 60);
     [bottomView addSubview:verifyButton];
     
     [verifyButton addTarget:self action:@selector(verifyButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -257,17 +257,17 @@
     
     if (self.isHaveSuperView) {
         
-        self.frame = JKImageClipScreenBounds;
+        self.frame = JKClipImageScreenBounds;
         
         return;
     }
     
     self.bottomView.userInteractionEnabled = NO;
     
-    self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
+    self.frame = CGRectMake(JKClipImageScreenWidth, 0, JKClipImageScreenWidth, JKClipImageScreenHeight);
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = JKImageClipScreenBounds;
+        self.frame = JKClipImageScreenBounds;
         
     } completion:^(BOOL finished) {
         
@@ -301,7 +301,7 @@
     CGFloat H = cropSize.height;
     CGFloat scale = W / H;
     
-    CGFloat screenW = MIN(JKImageClipScreenW, JKImageClipScreenH);
+    CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
     
     W = screenW;
     H = W / scale;
@@ -376,7 +376,7 @@
     }
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
+        self.frame = CGRectMake(JKClipImageScreenWidth, 0, JKClipImageScreenWidth, JKClipImageScreenHeight);
         
     } completion:^(BOOL finished) {
         
@@ -403,7 +403,7 @@
     
     [UIView animateWithDuration:0.25 animations:^{
         
-        self.frame = CGRectMake(JKImageClipScreenW, 0, JKImageClipScreenW, JKImageClipScreenH);
+        self.frame = CGRectMake(JKClipImageScreenWidth, 0, JKClipImageScreenWidth, JKClipImageScreenHeight);
         
     } completion:^(BOOL finished) {
         
@@ -419,7 +419,7 @@
 }
 
 - (UIImage *)clipImage{
-    //    if (self.imageView.frame.size.height < JKImageClipScreenW) {
+    //    if (self.imageView.frame.size.height < JKClipImageScreenWidth) {
     
     self.shapeLayer.hidden = YES;
     
@@ -434,15 +434,15 @@
     
     UIGraphicsEndImageContext();
     
-    CGRect rect1 = CGRectMake((JKImageClipScreenW - self.cropSize.width) * 0.5, (JKImageClipScreenH - self.cropSize.height) * 0.5, self.cropSize.width, self.cropSize.height);
+    CGRect rect1 = CGRectMake((JKClipImageScreenWidth - self.cropSize.width) * 0.5, (JKClipImageScreenHeight - self.cropSize.height) * 0.5, self.cropSize.width, self.cropSize.height);
     
     CGRect rect = [self convertRect:rect1 toView:self.imageView];
     
-    rect.origin.x = rect.origin.x < 0 ? 0 : rect.origin.x * JKImageClipScreenScale;
-    rect.origin.y = rect.origin.y < 0 ? 0 : rect.origin.y * JKImageClipScreenScale;
+    rect.origin.x = rect.origin.x < 0 ? 0 : rect.origin.x * JKClipImageScreenScale;
+    rect.origin.y = rect.origin.y < 0 ? 0 : rect.origin.y * JKClipImageScreenScale;
     
-    rect.size.width = rect.size.width > self.imageView.frame.size.width ? self.imageView.frame.size.width * JKImageClipScreenScale : rect.size.width * JKImageClipScreenScale;
-    rect.size.height = rect.size.height > self.imageView.frame.size.height ? self.imageView.frame.size.height * JKImageClipScreenScale : rect.size.height * JKImageClipScreenScale;
+    rect.size.width = rect.size.width > self.imageView.frame.size.width ? self.imageView.frame.size.width * JKClipImageScreenScale : rect.size.width * JKClipImageScreenScale;
+    rect.size.height = rect.size.height > self.imageView.frame.size.height ? self.imageView.frame.size.height * JKClipImageScreenScale : rect.size.height * JKClipImageScreenScale;
     
     /*
     if (rect.size.height != rect.size.width) {
@@ -473,16 +473,16 @@
     //
     //    //NSLog(@"图片尺寸--->%@", NSStringFromCGSize(self.image.size));
     //
-    //    CGRect rect = CGRectMake(0, (JKImageClipScreenH - JKImageClipScreenW) * 0.5, JKImageClipScreenW, JKImageClipScreenW);
+    //    CGRect rect = CGRectMake(0, (JKClipImageScreenHeight - JKClipImageScreenWidth) * 0.5, JKClipImageScreenWidth, JKClipImageScreenWidth);
     //
     //    CGRect convertRect = [self convertRect:rect toView:self.imageView];
     //    //NSLog(@"转换后范围--->%@", NSStringFromCGRect(convertRect));
     //
     //    convertRect = CGRectMake(
-    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
-    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKImageClipScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale,
-    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKImageClipScreenScale);
+    //                             convertRect.origin.x / self.imageView.frame.size.width * self.image.size.width * JKClipImageScreenScale,
+    //                             convertRect.origin.y / self.imageView.frame.size.height * self.image.size.height * JKClipImageScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKClipImageScreenScale,
+    //                             convertRect.size.width / self.imageView.frame.size.width * self.image.size.width * JKClipImageScreenScale);
     //    //NSLog(@"截取范围--->%@", NSStringFromCGRect(rect));
     //
     //    CGImageRef imageRef = CGImageCreateWithImageInRect(self.image.CGImage, convertRect);
@@ -542,8 +542,8 @@
 
 - (void)setInset{
     // 计算内边距，注意只能使用frame
-    CGFloat offsetX = (JKImageClipScreenW - (self.cropSize.width)) * 0.5;
-    CGFloat offsetY = self.imageView.frame.size.height >= self.cropSize.height ? (JKImageClipScreenH - (self.cropSize.height)) * 0.5 : (JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;//(JKImageClipScreenH - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetX = (JKClipImageScreenWidth - (self.cropSize.width)) * 0.5;
+    CGFloat offsetY = self.imageView.frame.size.height >= self.cropSize.height ? (JKClipImageScreenHeight - (self.cropSize.height)) * 0.5 : (JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;//(JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
     offsetX = (offsetX < 0) ? 0 : offsetX;
