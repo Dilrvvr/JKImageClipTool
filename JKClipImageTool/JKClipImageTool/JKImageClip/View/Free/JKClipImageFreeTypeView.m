@@ -430,7 +430,7 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
         return;
     }
     
-    self.userInteractionEnabled = NO;
+    self.contentView.userInteractionEnabled = NO;
     
     if (self.isCustomSuperView) {
         
@@ -463,7 +463,7 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
         return;
     }
     
-    self.userInteractionEnabled = NO;
+    self.contentView.userInteractionEnabled = NO;
     
     if (self.isCustomSuperView) {
         

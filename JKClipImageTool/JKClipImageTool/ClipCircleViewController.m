@@ -39,19 +39,6 @@
     
     __weak typeof(self) weakSelf = self;
     
-//    [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKClipImageTypeFreeWithNavBar) autoSavaToAlbum:NO completeHandler:^(UIImage *image) {
-//
-//        [weakSelf.navigationController popViewControllerAnimated:YES];
-//
-//        !weakSelf.completeHandler ? : weakSelf.completeHandler(image);
-//
-//    } cancelHandler:^{
-//
-//        [weakSelf.navigationController popViewControllerAnimated:YES];
-//
-//        !weakSelf.cancelHandler ? : weakSelf.cancelHandler();
-//    }];
-    
     _clipView = [JKClipImageTool showWithSuperView:self.view targetImage:self.pickImage clipImageType:(JKClipImageTypeCircle) clipImageSize:CGSizeZero isAutoSavaToAlbum:NO cancelHandler:^{
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -79,7 +66,7 @@
 }
 
 - (void)dealloc{
-//    _clipView = nil;
+    
     NSLog(@"%s", __func__);
 }
 

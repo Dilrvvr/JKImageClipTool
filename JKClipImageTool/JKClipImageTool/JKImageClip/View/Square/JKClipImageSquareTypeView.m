@@ -188,7 +188,7 @@
         return;
     }
     
-    self.userInteractionEnabled = NO;
+    self.contentView.userInteractionEnabled = NO;
     
     if (self.isCustomSuperView) {
         
@@ -220,7 +220,7 @@
         return;
     }
     
-    self.userInteractionEnabled = NO;
+    self.contentView.userInteractionEnabled = NO;
     
     if (self.isCustomSuperView) {
         
