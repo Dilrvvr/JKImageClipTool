@@ -54,7 +54,7 @@
  * image : 要裁剪的图片
  * isCircle : 是否裁剪为圆形
  * autoSavaToAlbum : 是否自动将截图保存到相册
- * complete : 截图完成的回调
+ * completeHandler : 截图完成的回调
  */
 + (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
@@ -91,7 +91,7 @@
  * image : 要裁剪的图片
  * cropSize : 要裁剪的宽高比
  * autoSavaToAlbum : 是否自动将截图保存到相册
- * complete : 截图完成的回调
+ * completeHandler : 截图完成的回调
  */
 + (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView cropSize:(CGSize)cropSize autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
@@ -332,7 +332,7 @@
     //设置scrollView的contentSize
     self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
     
-    [self setInset];
+    [self calculateInset];
     
     self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - self.cropSize.height) * 0.5);
 }
@@ -535,11 +535,11 @@
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView{
-    [self setInset];
+    [self calculateInset];
     //NSLog(@"图片frame--->%@", NSStringFromCGRect(self.imageView.frame));
 }
 
-- (void)setInset{
+- (void)calculateInset{
     // 计算内边距，注意只能使用frame
     CGFloat offsetX = (JKClipImageScreenWidth - (self.cropSize.width)) * 0.5;
     CGFloat offsetY = self.imageView.frame.size.height >= self.cropSize.height ? (JKClipImageScreenHeight - (self.cropSize.height)) * 0.5 : (JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;//(JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;

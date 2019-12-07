@@ -156,4 +156,49 @@
 #pragma mark
 #pragma mark - Property
 
+- (UIScrollView *)scrollView{
+    if (!_scrollView) {
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:JKClipImageScreenBounds];
+        scrollView.delegate = self;
+        scrollView.backgroundColor = [UIColor clearColor];
+        
+        scrollView.showsVerticalScrollIndicator = NO;
+        scrollView.showsHorizontalScrollIndicator = NO;
+        
+        scrollView.minimumZoomScale = 1;
+        
+        scrollView.alwaysBounceVertical = YES;
+        scrollView.alwaysBounceHorizontal = YES;
+        
+        SEL selector = NSSelectorFromString(@"setContentInsetAdjustmentBehavior:");
+        
+        if ([scrollView respondsToSelector:selector]) {
+            
+            IMP imp = [scrollView methodForSelector:selector];
+            void (*func)(id, SEL, NSInteger) = (void *)imp;
+            func(scrollView, selector, 2);
+            
+            // [tbView performSelector:@selector(setContentInsetAdjustmentBehavior:) withObject:@(2)];
+        }
+        
+        if (@available(iOS 13.0, *)) {
+            [scrollView setAutomaticallyAdjustsScrollIndicatorInsets:NO];
+        }
+        
+        [self.contentView insertSubview:scrollView atIndex:0];
+        _scrollView = scrollView;
+    }
+    return _scrollView;
+}
+
+- (UIImageView *)imageView{
+    if (!_imageView) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [self.scrollView addSubview:imageView];
+        imageView.backgroundColor = [UIColor clearColor];
+        _imageView = imageView;
+    }
+    return _imageView;
+}
+
 @end

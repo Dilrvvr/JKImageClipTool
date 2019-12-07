@@ -38,17 +38,17 @@
     
     __weak typeof(self) weakSelf = self;
     
-//    [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeFreeWithNavBar) autoSavaToAlbum:NO complete:^(UIImage *image) {
+//    [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeFreeWithNavBar) autoSavaToAlbum:NO completeHandler:^(UIImage *image) {
 //
 //        [weakSelf.navigationController popViewControllerAnimated:YES];
 //
-//        !weakSelf.complete ? : weakSelf.complete(image);
+//        !weakSelf.completeHandler ? : weakSelf.completeHandler(image);
 //
-//    } cancel:^{
+//    } cancelHandler:^{
 //
 //        [weakSelf.navigationController popViewControllerAnimated:YES];
 //
-//        !weakSelf.cancel ? : weakSelf.cancel();
+//        !weakSelf.cancelHandler ? : weakSelf.cancelHandler();
 //    }];
     
     _clipView = [JKImageClipTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {

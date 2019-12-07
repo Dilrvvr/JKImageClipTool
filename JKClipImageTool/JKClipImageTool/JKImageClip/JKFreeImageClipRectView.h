@@ -23,5 +23,5 @@
 @property (nonatomic, weak, readonly) UIImageView *bottom_right_imageView;
 
 /** middle */
-@property (nonatomic, weak, readonly) UIImageView *middle_imageView;
+@property (nonatomic, weak, readonly) UIImageView *center_imageView;
 @end

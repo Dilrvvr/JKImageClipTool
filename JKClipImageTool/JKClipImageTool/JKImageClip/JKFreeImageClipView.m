@@ -26,12 +26,10 @@
     CGFloat startPicW;
     CGFloat startPicH;
     BOOL isPanning;
+    
+    CGFloat JKFreeImageClipViewTopMinInset;
+    CGFloat JKFreeImageClipViewBottomViewH;
 }
-/** scrollView */
-@property (nonatomic, weak) UIScrollView *scrollView;
-
-/** imageView */
-@property (nonatomic, weak) UIImageView *imageView;
 
 /** shapeLayer */
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
@@ -43,10 +41,10 @@
 @property (nonatomic, weak) JKFreeImageClipRectView *rectView;
 
 /** 截图完成的block */
-@property (nonatomic, copy) void (^complete)(UIImage *image);
+@property (nonatomic, copy) void (^completeHandler)(UIImage *image);
 
 /** 取消的block */
-@property (nonatomic, copy) void (^cancel)(void);
+@property (nonatomic, copy) void (^cancelHandler)(void);
 
 /** 图片 */
 @property (nonatomic, strong) UIImage *image;
@@ -55,106 +53,63 @@
 @property (nonatomic, assign) int startCorner;
 
 /** 是否自动保存截图到相册 */
-@property (nonatomic, assign) BOOL autoSavaToAlbum;
+@property (nonatomic, assign) BOOL isAutoSavaToAlbum;
 
 /** 是否传入了父试图 */
-@property (nonatomic, assign) BOOL isHaveSuperView;
+@property (nonatomic, assign) BOOL isCustomSuperView;
 
-/** 是否有导航条 */
-@property (nonatomic, assign) BOOL isHaveNavBar;
+/** 是否仅展示图片 */
+@property (nonatomic, assign) BOOL isJustShowImage;
 @end
 
 // 通用间距
 static CGFloat const commonMargin_ = 20;
-static CGFloat JKFreeImageClipViewTopMinInset = 0;
-static CGFloat JKFreeImageClipViewBottomViewH = 0;
 
 @implementation JKFreeImageClipView
-
-static BOOL isClip = YES;
 
 /**
  * 自由裁剪图片
  * image : 要裁剪的图片
  * superView : 父视图
  * isHaveNavBar : 是否有导航条，注意必须有父视图，这里才有效，设为YES则会隐藏底部确定取消按钮
- * autoSavaToAlbum : 是否自动将截图保存到相册
- * complete : 截图完成的回调
- * cancel : 点击取消的回调
+ * isAutoSavaToAlbum : 是否自动将截图保存到相册
+ * completeHandler : 截图完成的回调
+ * cancelHandler : 点击取消的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (instancetype)showWithSuperView:(UIView *)superView
+                      targetImage:(UIImage *)targetImage
+                  isJustShowImage:(BOOL)isJustShowImage
+              isShowNavigationBar:(BOOL)isShowNavigationBar
+                isAutoSavaToAlbum:(BOOL)isAutoSavaToAlbum
+                    cancelHandler:(void(^)(void))cancelHandler
+                  completeHandler:(void(^)(UIImage *image))completeHandler{
     
-    if (!image) {
-        return nil;
-    }
-    
-    JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 54 : 30);
-    JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 94 : 60);
-    
-    if (superView && isHaveNavBar) {
-        
-        JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 98 : 78);
-        JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 34 : 0);
-    }
-    
-    isClip = YES;
+    if (!targetImage) { return nil; }
     
     JKFreeImageClipView *icv = [[JKFreeImageClipView alloc] init];
-    icv.image = image;
-    icv.complete = complete;
-    icv.cancel = cancel;
-    icv.autoSavaToAlbum = autoSavaToAlbum;
+    
+    icv->JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 54 : 30);
+    icv->JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 94 : 60);
+    
+    if (superView && isShowNavigationBar) {
+        
+        icv->JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 98 : 78);
+        icv->JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 34 : 0);
+    }
+    
+    icv.image = targetImage;
+    icv.isJustShowImage = isJustShowImage;
+    icv.completeHandler = completeHandler;
+    icv.cancelHandler = cancelHandler;
+    icv.isAutoSavaToAlbum = isAutoSavaToAlbum;
     
     if (superView) {
         
-        icv.isHaveSuperView = YES;
+        icv.isCustomSuperView = YES;
+        
         [superView addSubview:icv];
         
-    }else{
-        
-        [[UIApplication sharedApplication].delegate.window addSubview:icv];
-    }
-    
-    return icv;
-}
-
-/**
- * 仅展示图片
- * image : 要展示的图片
- * complete : 点击确定的回调
- * cancel : 点击取消的回调
- */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
-    
-    //#define JKFreeImageClipViewTopMinInset (JKClipImageIsDeviceX() ? 54 : 30)
-    //#define JKFreeImageClipViewBottomViewH (JKClipImageIsDeviceX() ? 94 : 60)
-    
-    if (!image) {
-        return nil;
-    }
-    
-    JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 54 : 30);
-    JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 94 : 60);
-    
-    if (superView && isHaveNavBar) {
-        
-        JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 98 : 78);
-        JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 34 : 0);
-    }
-    
-    isClip = NO;
-    
-    JKFreeImageClipView *icv = [[JKFreeImageClipView alloc] init];
-    icv.image = image;
-    icv.complete = complete;
-    icv.cancel = cancel;
-    
-    if (superView) {
-        
-        icv.isHaveSuperView = YES;
-        [superView addSubview:icv];
-        
-    }else{
+    } else {
         
         [[UIApplication sharedApplication].delegate.window addSubview:icv];
     }
@@ -175,12 +130,6 @@ static BOOL isClip = YES;
 - (void)initialization{
     [super initialization];
     
-}
-
-/** 创建UI */
-- (void)createUI{
-    [super createUI];
-    
     self.backgroundColor = [UIColor blackColor];
     self.frame = JKClipImageScreenBounds;
     minWH = 60;
@@ -191,17 +140,19 @@ static BOOL isClip = YES;
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
     doubleTap.numberOfTapsRequired = 2;
     [self.contentView addGestureRecognizer:doubleTap];
+}
+
+/** 创建UI */
+- (void)createUI{
+    [super createUI];
     
     // 遮盖view
     [self createCoverViewUI];
-    
-    // 底部控件
-    [self setupBottomView];
 }
 
 - (void)createCoverViewUI{
     
-    if (!isClip) return;
+    if (self.isJustShowImage) return;
     
     // 遮盖view
     JKFreeImageClipCoverView *coverView = [[JKFreeImageClipCoverView alloc] init];
@@ -217,13 +168,6 @@ static BOOL isClip = YES;
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [rectView addGestureRecognizer:pan];
-}
-
-- (void)setupBottomView{
-    return;
-    if (JKFreeImageClipViewBottomViewH <= 34) {
-        return;
-    }
 }
 
 /** 布局UI */
@@ -246,7 +190,7 @@ static BOOL isClip = YES;
     
     if (!newSuperview) { return; }
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
         self.frame = JKClipImageScreenBounds;
         
@@ -447,7 +391,7 @@ static BOOL isClip = YES;
         return 4;
     }
     
-    if ([self.rectView.middle_imageView pointInside:[self convertPoint:point toView:self.rectView.middle_imageView] withEvent:nil]) {
+    if ([self.rectView.center_imageView pointInside:[self convertPoint:point toView:self.rectView.center_imageView] withEvent:nil]) {
         
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
         minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
@@ -473,13 +417,12 @@ static BOOL isClip = YES;
     
     if (![self.imageView pointInside:point withEvent:nil]) { return; }
     
-    if (!isClip) {
+    if (self.isJustShowImage) {
         
         self.scrollView.zoomScale == 1 ? [self.scrollView zoomToRect:CGRectMake(touchPoint.x - 15, touchPoint.y - 15, 30, 30) animated:YES] : [self.scrollView setZoomScale:1 animated:YES];
         
         return;
     }
-    
     
     if (self.imageView.frame.size.width <= self.rectView.frame.size.width || self.imageView.frame.size.height <= self.rectView.frame.size.height) {
         
@@ -508,9 +451,9 @@ static BOOL isClip = YES;
     
     self.userInteractionEnabled = NO;
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
-        !self.cancel ? : self.cancel();
+        !self.cancelHandler ? : self.cancelHandler();
         
         [self removeFromSuperview];
         
@@ -523,7 +466,7 @@ static BOOL isClip = YES;
         
     } completion:^(BOOL finished) {
         
-        !self.cancel ? : self.cancel();
+        !self.cancelHandler ? : self.cancelHandler();
         
         [self removeFromSuperview];
     }];
@@ -541,9 +484,9 @@ static BOOL isClip = YES;
     
     self.userInteractionEnabled = NO;
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
-        !self.complete ? : self.complete(isClip ? [self clipImage] : self.image);
+        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.image : [self clipImage]);
         
         [self removeFromSuperview];
         
@@ -556,7 +499,7 @@ static BOOL isClip = YES;
         
     } completion:^(BOOL finished) {
         
-        !self.complete ? : self.complete(isClip ? [self clipImage] : self.image);
+        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.image : [self clipImage]);
         
         [self removeFromSuperview];
     }];
@@ -602,7 +545,7 @@ static BOOL isClip = YES;
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
     
-    if (!isClip) return;
+    if (self.isJustShowImage) return;
     
     self.scrollView.contentInset = UIEdgeInsetsMake(self.rectView.frame.origin.y, self.rectView.frame.origin.x, JKClipImageScreenHeight - CGRectGetMaxY(self.rectView.frame), JKClipImageScreenWidth - CGRectGetMaxX(self.rectView.frame));
 }
@@ -610,51 +553,6 @@ static BOOL isClip = YES;
 
 #pragma mark
 #pragma mark - Property
-
-- (UIScrollView *)scrollView{
-    if (!_scrollView) {
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:JKClipImageScreenBounds];
-        scrollView.delegate = self;
-        scrollView.backgroundColor = [UIColor clearColor];
-        
-        scrollView.showsVerticalScrollIndicator = NO;
-        scrollView.showsHorizontalScrollIndicator = NO;
-        
-        scrollView.minimumZoomScale = 1;
-        
-        scrollView.alwaysBounceVertical = YES;
-        scrollView.alwaysBounceHorizontal = YES;
-        
-        SEL selector = NSSelectorFromString(@"setContentInsetAdjustmentBehavior:");
-        
-        if ([scrollView respondsToSelector:selector]) {
-            
-            IMP imp = [scrollView methodForSelector:selector];
-            void (*func)(id, SEL, NSInteger) = (void *)imp;
-            func(scrollView, selector, 2);
-            
-            // [tbView performSelector:@selector(setContentInsetAdjustmentBehavior:) withObject:@(2)];
-        }
-        
-        if (@available(iOS 13.0, *)) {
-            [scrollView setAutomaticallyAdjustsScrollIndicatorInsets:NO];
-        }
-        
-        [self.contentView insertSubview:scrollView atIndex:0];
-        _scrollView = scrollView;
-    }
-    return _scrollView;
-}
-
-- (UIImageView *)imageView{
-    if (!_imageView) {
-        UIImageView *imageView = [[UIImageView alloc] init];
-        [self.scrollView addSubview:imageView];
-        imageView.backgroundColor = [UIColor clearColor];
-        _imageView = imageView;
-    }
-    return _imageView;
-}
 
 #pragma mark - 点击事件
 
@@ -684,7 +582,7 @@ static BOOL isClip = YES;
         //        self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
         //        //NSLog(@"更新了contentSize");
         
-    }else{//图片不高于屏幕
+    } else {//图片不高于屏幕
         
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);//CGSizeMake(pictureW, pictureH);
         //图片显示在中间
@@ -750,7 +648,7 @@ static BOOL isClip = YES;
     
     CGImageRelease(imageRef);
     
-    if (self.autoSavaToAlbum) {
+    if (self.isAutoSavaToAlbum) {
         
         UIImageWriteToSavedPhotosAlbum(newImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }

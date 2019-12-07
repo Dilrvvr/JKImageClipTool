@@ -12,9 +12,9 @@
 /** pickImage */
 @property (nonatomic, strong) UIImage *pickImage;
 
-/** complete */
+/** completeHandler */
 @property (nonatomic, copy) void (^complete)(UIImage *image);
 
-/** cancel */
+/** cancelHandler */
 @property (nonatomic, copy) void (^cancel)(void);
 @end

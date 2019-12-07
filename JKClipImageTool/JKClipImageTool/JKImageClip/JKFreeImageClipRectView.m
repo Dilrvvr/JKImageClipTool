@@ -61,9 +61,9 @@
     
     
     UIImageView *middle_imageView = [[UIImageView alloc] init];
-    //middle_imageView.backgroundColor = [UIColor redColor];
+    //center_imageView.backgroundColor = [UIColor redColor];
     [self addSubview:middle_imageView];
-    _middle_imageView = middle_imageView;
+    _center_imageView = middle_imageView;
     
     middle_imageView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *middle_imageViewCons1 = [NSLayoutConstraint constraintWithItem:middle_imageView attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:self attribute:(NSLayoutAttributeCenterX) multiplier:1 constant:0];
@@ -159,7 +159,7 @@
         [self.top_right_imageView pointInside:[self convertPoint:point toView:self.top_right_imageView] withEvent:event] ||
         [self.bottom_left_imageView pointInside:[self convertPoint:point toView:self.bottom_left_imageView] withEvent:event] ||
         [self.bottom_right_imageView pointInside:[self convertPoint:point toView:self.bottom_right_imageView] withEvent:event] ||
-        [self.middle_imageView pointInside:[self convertPoint:point toView:self.middle_imageView] withEvent:event]) {
+        [self.center_imageView pointInside:[self convertPoint:point toView:self.center_imageView] withEvent:event]) {
         
         return self;
     }
