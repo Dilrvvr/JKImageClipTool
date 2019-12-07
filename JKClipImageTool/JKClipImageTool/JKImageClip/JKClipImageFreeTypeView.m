@@ -1,12 +1,12 @@
 //
-//  JKFreeImageClipView.m
+//  JKClipImageFreeTypeView.m
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/18.
 //  Copyright © 2017年 安永博. All rights reserved.
 //
 
-#import "JKFreeImageClipView.h"
+#import "JKClipImageFreeTypeView.h"
 #import "JKFreeImageClipCoverView.h"
 #import "JKFreeImageClipRectView.h"
 #import "JKClipImageConst.h"
@@ -14,7 +14,7 @@
 //#define JKFreeImageClipViewTopMinInset (JKClipImageIsDeviceX() ? 54 : 30)
 //#define JKFreeImageClipViewBottomViewH (JKClipImageIsDeviceX() ? 94 : 60)
 
-@interface JKFreeImageClipView () <UIScrollViewDelegate>
+@interface JKClipImageFreeTypeView () <UIScrollViewDelegate>
 {
     CGFloat maxX;
     CGFloat maxY;
@@ -65,7 +65,7 @@
 // 通用间距
 static CGFloat const commonMargin_ = 20;
 
-@implementation JKFreeImageClipView
+@implementation JKClipImageFreeTypeView
 
 /**
  * 自由裁剪图片
@@ -86,7 +86,7 @@ static CGFloat const commonMargin_ = 20;
     
     if (!targetImage) { return nil; }
     
-    JKFreeImageClipView *icv = [[JKFreeImageClipView alloc] init];
+    JKClipImageFreeTypeView *icv = [[JKClipImageFreeTypeView alloc] init];
     
     icv->JKFreeImageClipViewTopMinInset = (JKClipImageIsDeviceX() ? 54 : 30);
     icv->JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 94 : 60);

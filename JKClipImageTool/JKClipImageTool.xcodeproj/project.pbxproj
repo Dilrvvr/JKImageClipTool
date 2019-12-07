@@ -24,7 +24,7 @@
 		50A29689207229B9008E75E2 /* ClipCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A29688207229B9008E75E2 /* ClipCircleViewController.m */; };
 		50CA14401F415449002766D2 /* JKFreeImageClipCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */; };
 		50CA14411F415449002766D2 /* JKFreeImageClipRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */; };
-		50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143B1F415449002766D2 /* JKFreeImageClipView.m */; };
+		50CA14421F415449002766D2 /* JKClipImageFreeTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */; };
 		50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143D1F415449002766D2 /* JKImageClipTool.m */; };
 		50CA14441F415449002766D2 /* JKSqureImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143F1F415449002766D2 /* JKSqureImageClipView.m */; };
 		50F3207F1ECEFD260022F298 /* JKClipImageToolResouce.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */; };
@@ -79,8 +79,8 @@
 		50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipCoverView.m; sourceTree = "<group>"; };
 		50CA14381F415449002766D2 /* JKFreeImageClipRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipRectView.h; sourceTree = "<group>"; };
 		50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipRectView.m; sourceTree = "<group>"; };
-		50CA143A1F415449002766D2 /* JKFreeImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFreeImageClipView.h; sourceTree = "<group>"; };
-		50CA143B1F415449002766D2 /* JKFreeImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFreeImageClipView.m; sourceTree = "<group>"; };
+		50CA143A1F415449002766D2 /* JKClipImageFreeTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKClipImageFreeTypeView.h; sourceTree = "<group>"; };
+		50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKClipImageFreeTypeView.m; sourceTree = "<group>"; };
 		50CA143C1F415449002766D2 /* JKImageClipTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKImageClipTool.h; sourceTree = "<group>"; };
 		50CA143D1F415449002766D2 /* JKImageClipTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKImageClipTool.m; sourceTree = "<group>"; };
 		50CA143E1F415449002766D2 /* JKSqureImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSqureImageClipView.h; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 				50CA14371F415449002766D2 /* JKFreeImageClipCoverView.m */,
 				50CA14381F415449002766D2 /* JKFreeImageClipRectView.h */,
 				50CA14391F415449002766D2 /* JKFreeImageClipRectView.m */,
-				50CA143A1F415449002766D2 /* JKFreeImageClipView.h */,
-				50CA143B1F415449002766D2 /* JKFreeImageClipView.m */,
+				50CA143A1F415449002766D2 /* JKClipImageFreeTypeView.h */,
+				50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */,
 				50CA143C1F415449002766D2 /* JKImageClipTool.h */,
 				50CA143D1F415449002766D2 /* JKImageClipTool.m */,
 				50CA143E1F415449002766D2 /* JKSqureImageClipView.h */,
@@ -345,7 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50CA14421F415449002766D2 /* JKFreeImageClipView.m in Sources */,
+				50CA14421F415449002766D2 /* JKClipImageFreeTypeView.m in Sources */,
 				507FA1131EC9A2D70074D808 /* ViewController.m in Sources */,
 				50A291D8239B584A00E3265F /* JKClipImageBaseView.m in Sources */,
 				50A29689207229B9008E75E2 /* ClipCircleViewController.m in Sources */,

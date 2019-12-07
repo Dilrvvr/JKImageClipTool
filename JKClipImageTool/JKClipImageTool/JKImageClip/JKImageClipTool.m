@@ -9,7 +9,7 @@
 #import "JKImageClipTool.h"
 
 #import "JKSqureImageClipView.h"
-#import "JKFreeImageClipView.h"
+#import "JKClipImageFreeTypeView.h"
 
 @implementation JKImageClipTool
 
@@ -29,7 +29,7 @@
             
         case JKImageClipTypeJustShowImage:
         {
-            return [JKFreeImageClipView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:NO isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:NO isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
         }
             break;
             
@@ -47,19 +47,19 @@
             
         case JKImageClipTypeFree:
         {
-            return [JKFreeImageClipView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
         case JKImageClipTypeJustShowImageWithNavBar:
         {
-            return [JKFreeImageClipView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:YES isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:YES isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
         }
             break;
             
         case JKImageClipTypeFreeWithNavBar:
         {
-            return [JKFreeImageClipView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
+            return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             

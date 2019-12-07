@@ -1,5 +1,5 @@
 //
-//  JKFreeImageClipView.h
+//  JKClipImageFreeTypeView.h
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/18.
@@ -9,7 +9,7 @@
 #import "JKClipImageBaseView.h"
 #import "JKClipImageConst.h"
 
-@interface JKFreeImageClipView : JKClipImageBaseView
+@interface JKClipImageFreeTypeView : JKClipImageBaseView
 
 /**
  * 自由裁剪图片
