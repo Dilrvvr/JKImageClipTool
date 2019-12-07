@@ -116,21 +116,11 @@
 		5046F4741ECEE3B0003F9AC2 /* JKImageClip */ = {
 			isa = PBXGroup;
 			children = (
-				50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */,
-				50CA14361F415449002766D2 /* JKClipImageFreeTypeCoverView.h */,
-				50CA14371F415449002766D2 /* JKClipImageFreeTypeCoverView.m */,
-				50CA14381F415449002766D2 /* JKClipImageFreeTypeRectView.h */,
-				50CA14391F415449002766D2 /* JKClipImageFreeTypeRectView.m */,
-				50CA143A1F415449002766D2 /* JKClipImageFreeTypeView.h */,
-				50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */,
 				50CA143C1F415449002766D2 /* JKImageClipTool.h */,
 				50CA143D1F415449002766D2 /* JKImageClipTool.m */,
-				50CA143E1F415449002766D2 /* JKSqureImageClipView.h */,
-				50CA143F1F415449002766D2 /* JKSqureImageClipView.m */,
-				50A291D3239B526B00E3265F /* JKClipImageConst.h */,
-				50A291D4239B526B00E3265F /* JKClipImageConst.m */,
-				50A291D6239B584A00E3265F /* JKClipImageBaseView.h */,
-				50A291D7239B584A00E3265F /* JKClipImageBaseView.m */,
+				50A291DA239B854D00E3265F /* Resource */,
+				50A291DB239B855C00E3265F /* Utility */,
+				50A291DC239B859100E3265F /* View */,
 			);
 			path = JKImageClip;
 			sourceTree = "<group>";
@@ -203,6 +193,64 @@
 				507FA1321EC9A2D70074D808 /* Info.plist */,
 			);
 			path = JKClipImageToolUITests;
+			sourceTree = "<group>";
+		};
+		50A291D9239B854400E3265F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				50A291D6239B584A00E3265F /* JKClipImageBaseView.h */,
+				50A291D7239B584A00E3265F /* JKClipImageBaseView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		50A291DA239B854D00E3265F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		50A291DB239B855C00E3265F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				50A291D3239B526B00E3265F /* JKClipImageConst.h */,
+				50A291D4239B526B00E3265F /* JKClipImageConst.m */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		50A291DC239B859100E3265F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50A291D9239B854400E3265F /* Base */,
+				50A291DD239B85A300E3265F /* Free */,
+				50A291DE239B85AE00E3265F /* Square */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50A291DD239B85A300E3265F /* Free */ = {
+			isa = PBXGroup;
+			children = (
+				50CA14361F415449002766D2 /* JKClipImageFreeTypeCoverView.h */,
+				50CA14371F415449002766D2 /* JKClipImageFreeTypeCoverView.m */,
+				50CA14381F415449002766D2 /* JKClipImageFreeTypeRectView.h */,
+				50CA14391F415449002766D2 /* JKClipImageFreeTypeRectView.m */,
+				50CA143A1F415449002766D2 /* JKClipImageFreeTypeView.h */,
+				50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */,
+			);
+			path = Free;
+			sourceTree = "<group>";
+		};
+		50A291DE239B85AE00E3265F /* Square */ = {
+			isa = PBXGroup;
+			children = (
+				50CA143E1F415449002766D2 /* JKSqureImageClipView.h */,
+				50CA143F1F415449002766D2 /* JKSqureImageClipView.m */,
+			);
+			path = Square;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
