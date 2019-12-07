@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** imageView */
 @property (nonatomic, weak) UIImageView *imageView;
 
-/** bottomView */
-@property (nonatomic, weak) UIView *bottomView;
+/** bottomControlView */
+@property (nonatomic, weak) UIView *bottomControlView;
 
 /** cancelButton */
 @property (nonatomic, weak) UIButton *cancelButton;

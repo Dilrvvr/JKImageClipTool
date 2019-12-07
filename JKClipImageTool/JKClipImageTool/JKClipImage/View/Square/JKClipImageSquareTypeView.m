@@ -137,7 +137,7 @@
         return;
     }
     
-    self.bottomView.userInteractionEnabled = NO;
+    self.bottomControlView.userInteractionEnabled = NO;
     
     self.frame = CGRectMake(JKClipImageScreenWidth, 0, JKClipImageScreenWidth, JKClipImageScreenHeight);
     
@@ -146,7 +146,7 @@
         
     } completion:^(BOOL finished) {
         
-        self.bottomView.userInteractionEnabled = YES;
+        self.bottomControlView.userInteractionEnabled = YES;
     }];
 }
 

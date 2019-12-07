@@ -175,7 +175,7 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
         return;
     }
     
-    self.bottomView.userInteractionEnabled = NO;
+    self.bottomControlView.userInteractionEnabled = NO;
     
     self.frame = CGRectMake(JKClipImageScreenWidth, 0, JKClipImageScreenWidth, JKClipImageScreenHeight);
     
@@ -185,7 +185,7 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
         
     } completion:^(BOOL finished) {
         
-        self.bottomView.userInteractionEnabled = YES;
+        self.bottomControlView.userInteractionEnabled = YES;
     }];
 }
 
@@ -611,7 +611,7 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
 
 - (UIImage *)clipImage{
     
-    self.bottomView.hidden = YES;
+    self.bottomControlView.hidden = YES;
     self.coverView.hidden = YES;
     self.rectView.hidden = YES;
     

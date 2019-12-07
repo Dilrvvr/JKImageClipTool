@@ -7,7 +7,6 @@
 //
 
 #import "JKClipImageBaseView.h"
-#import "JKClipImageConst.h"
 
 @interface JKClipImageFreeTypeView : JKClipImageBaseView
 

@@ -75,12 +75,12 @@
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKClipImageScreenHeight - 60 - (JKClipImageIsDeviceX() ? 34 : 0), JKClipImageScreenWidth, 60 + (JKClipImageIsDeviceX() ? 34 : 0))];
     bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
     [self.contentView addSubview:bottomView];
-    _bottomView = bottomView;
+    _bottomControlView = bottomView;
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, JKClipImageScreenWidth, 0.5)];
     lineView.userInteractionEnabled = NO;
     lineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
-    [self.bottomView addSubview:lineView];
+    [self.bottomControlView addSubview:lineView];
     
     UIButton *cancelButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [cancelButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -109,7 +109,7 @@
 /** 初始化UI数据 交给子类重写 super自动调用该方法 */
 - (void)initializeUIData{
     
-    [self.contentView bringSubviewToFront:self.bottomView];
+    [self.contentView bringSubviewToFront:self.bottomControlView];
 }
 
 #pragma mark
@@ -152,7 +152,7 @@
 
 - (void)hideBottomView{
     
-    self.bottomView.hidden = YES;
+    self.bottomControlView.hidden = YES;
 }
 
 
