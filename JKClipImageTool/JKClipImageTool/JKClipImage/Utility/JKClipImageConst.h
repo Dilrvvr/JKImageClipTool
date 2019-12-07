@@ -41,7 +41,13 @@ typedef enum : NSUInteger {
 #pragma mark
 #pragma mark - Protocol
 
-@protocol JKImageClipProtocol
+@protocol JKClipImageProtocol
+
+/** cancelButton */
+@property (nonatomic, weak) UIButton *cancelButton;
+
+/** verifyButton */
+@property (nonatomic, weak) UIButton *verifyButton;
 
 /** 取消 */
 - (void)cancelButtonClick;

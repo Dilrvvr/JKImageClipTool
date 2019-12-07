@@ -12,7 +12,7 @@
 @interface ClipCircleViewController ()
 
 /** clipView */
-@property (nonatomic, weak) id<JKImageClipProtocol> clipView;
+@property (nonatomic, weak) id<JKClipImageProtocol> clipView;
 @end
 
 @implementation ClipCircleViewController

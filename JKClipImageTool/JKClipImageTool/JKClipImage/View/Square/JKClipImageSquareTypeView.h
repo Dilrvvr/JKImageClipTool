@@ -8,7 +8,7 @@
 
 #import "JKClipImageBaseView.h"
 
-@interface JKClipImageSquareTypeView : JKClipImageBaseView <JKImageClipProtocol>
+@interface JKClipImageSquareTypeView : JKClipImageBaseView <JKClipImageProtocol>
 
 /**
  * 裁剪正方形图片

@@ -87,6 +87,7 @@
     [cancelButton setTitle:@"取消" forState:(UIControlStateNormal)];
     cancelButton.frame = CGRectMake(0, 0, 90, 60);
     [bottomView addSubview:cancelButton];
+    _cancelButton = cancelButton;
     
     [cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     
@@ -95,6 +96,7 @@
     [verifyButton setTitle:@"确定" forState:(UIControlStateNormal)];
     verifyButton.frame = CGRectMake(JKClipImageScreenWidth - 90, 0, 90, 60);
     [bottomView addSubview:verifyButton];
+    _verifyButton = verifyButton;
     
     [verifyButton addTarget:self action:@selector(verifyButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
 }
@@ -138,7 +140,7 @@
 
 
 #pragma mark
-#pragma mark - JKImageClipProtocol
+#pragma mark - JKClipImageProtocol
 
 - (void)cancelButtonClick{
     

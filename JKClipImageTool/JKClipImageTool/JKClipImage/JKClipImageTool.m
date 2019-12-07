@@ -25,7 +25,7 @@
  * cancelHandler : 点击取消的回调
  * return value: 返回的对象是对应的view，使用id+协议方便操作
  */
-+ (id<JKImageClipProtocol>)showWithSuperView:(UIView *)superView
++ (id<JKClipImageProtocol>)showWithSuperView:(UIView *)superView
                                  targetImage:(UIImage *)targetImage
                                clipImageType:(JKClipImageType)clipImageType
                                clipImageSize:(CGSize)clipImageSize

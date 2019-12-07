@@ -126,13 +126,11 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
 - (void)createUI{
     [super createUI];
     
-    // 遮盖view
-    [self createCoverViewUI];
 }
 
 - (void)createCoverViewUI{
     
-    if (self.isJustShowImage) return;
+    if (_coverView) return;
     
     // 遮盖view
     JKClipImageFreeTypeCoverView *coverView = [[JKClipImageFreeTypeCoverView alloc] init];
@@ -496,6 +494,22 @@ static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
 
 #pragma mark
 #pragma mark - 赋值
+
+- (void)setIsJustShowImage:(BOOL)isJustShowImage{
+    _isJustShowImage = isJustShowImage;
+    
+    if (isJustShowImage) {
+        
+        [_coverView removeFromSuperview];
+        
+        [_rectView removeFromSuperview];
+        
+        return;
+    }
+    
+    // 遮盖view
+    [self createCoverViewUI];
+}
 
 - (void)setTargetImage:(UIImage *)targetImage{
     

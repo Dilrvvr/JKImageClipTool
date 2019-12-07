@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JKClipImageBaseView : UIView <UIScrollViewDelegate ,JKImageClipProtocol>
+@interface JKClipImageBaseView : UIView <UIScrollViewDelegate ,JKClipImageProtocol>
 
 /** backgroundView */
 @property (nonatomic, weak) UIView *backgroundView;
@@ -27,6 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** bottomView */
 @property (nonatomic, weak) UIView *bottomView;
+
+/** cancelButton */
+@property (nonatomic, weak) UIButton *cancelButton;
+
+/** verifyButton */
+@property (nonatomic, weak) UIButton *verifyButton;
 
 /** 图片 */
 @property (nonatomic, strong) UIImage *targetImage;

@@ -13,7 +13,7 @@
 
 // =====================================Attention=====================================
 
-// 当你需要把视图放在一个控制器的view中，并带有导航条时，需要的操作请查阅<JKImageClipProtocol>协议
+// 当你需要把视图放在一个控制器的view中，并带有导航条时，需要的操作请查阅<JKClipImageProtocol>协议
 // 具体可参照ClipCircleViewController的写法
 
 // important!! 暂不支持横屏操作，请保证使用时处于竖屏状态！！！
@@ -32,7 +32,7 @@
  * cancelHandler : 点击取消的回调
  * return value: 返回的对象是对应的view，使用id+协议方便操作
  */
-+ (id<JKImageClipProtocol>)showWithSuperView:(UIView *)superView
++ (id<JKClipImageProtocol>)showWithSuperView:(UIView *)superView
                                  targetImage:(UIImage *)targetImage
                                clipImageType:(JKClipImageType)clipImageType
                                clipImageSize:(CGSize)clipImageSize
