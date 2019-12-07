@@ -113,7 +113,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5046F4741ECEE3B0003F9AC2 /* JKImageClip */ = {
+		5046F4741ECEE3B0003F9AC2 /* JKClipImage */ = {
 			isa = PBXGroup;
 			children = (
 				50CA143C1F415449002766D2 /* JKClipImageTool.h */,
@@ -122,7 +122,7 @@
 				50A291DB239B855C00E3265F /* Utility */,
 				50A291DC239B859100E3265F /* View */,
 			);
-			path = JKImageClip;
+			path = JKClipImage;
 			sourceTree = "<group>";
 		};
 		507FA0FF1EC9A2D70074D808 = {
@@ -156,7 +156,7 @@
 				507FA13F1EC9A3140074D808 /* TestViewController.m */,
 				50A29687207229B9008E75E2 /* ClipCircleViewController.h */,
 				50A29688207229B9008E75E2 /* ClipCircleViewController.m */,
-				5046F4741ECEE3B0003F9AC2 /* JKImageClip */,
+				5046F4741ECEE3B0003F9AC2 /* JKClipImage */,
 				505C22991ECC1F040047903D /* conan.PNG */,
 				505C22971ECC1EFE0047903D /* lizi.JPG */,
 				505C22951ECC115F0047903D /* IMG_0049.JPG */,
