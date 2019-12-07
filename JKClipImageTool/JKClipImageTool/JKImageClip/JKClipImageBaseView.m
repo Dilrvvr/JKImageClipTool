@@ -142,12 +142,23 @@
     self.bottomView.hidden = YES;
 }
 
+- (void)cancelButtonClick {
+    
+}
+
+
+- (void)enableDeallocLog {
+    
+}
+
+
+- (void)verifyButtonClick {
+    
+}
+
+
 
 #pragma mark
 #pragma mark - Property
-
-
-
-
 
 @end
