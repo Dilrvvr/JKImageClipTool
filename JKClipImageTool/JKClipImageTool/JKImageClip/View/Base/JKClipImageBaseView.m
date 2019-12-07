@@ -138,7 +138,7 @@
 
 
 #pragma mark
-#pragma mark - JKImageClipActionProtocol
+#pragma mark - JKImageClipProtocol
 
 - (void)cancelButtonClick{
     

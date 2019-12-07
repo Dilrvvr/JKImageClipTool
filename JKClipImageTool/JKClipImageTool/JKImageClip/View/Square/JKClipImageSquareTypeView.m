@@ -20,8 +20,11 @@
 /** 是否裁剪为圆形 */
 @property (nonatomic, assign) BOOL isCircle;
 
-/** 宽高比 */
+/** 宽高比 用于显示线框 */
 @property (nonatomic, assign) CGSize clipSize;
+
+/** 图片裁剪真实宽高 */
+//@property (nonatomic, assign) CGSize clipImageSize;
 @end
 
 @implementation JKClipImageSquareTypeView
@@ -252,33 +255,20 @@
 #pragma mark
 #pragma mark - 赋值
 
-- (void)setClipSize:(CGSize)cropSize{
+- (void)setClipSize:(CGSize)clipSize{
     
-    CGFloat W = cropSize.width;
-    CGFloat H = cropSize.height;
-    CGFloat scale = W / H;
+    _clipSize = [self calculateClipSizeWithOriginalSize:clipSize];
+}
+
+- (void)setIsCircle:(BOOL)isCircle{
+    _isCircle = isCircle;
     
-    CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
-    
-    if (MIN(W, H) <= 0) {
+    if (isCircle) {
         
-        W = screenW;
-        H = screenW;
-    }
-    
-    if (W > screenW) {
+        CGFloat WH = MIN(self.clipSize.width, self.clipSize.height);
         
-        W = screenW;
-        H = W / scale;
+        _clipSize = CGSizeMake(WH, WH);
     }
-    
-    if (H > maxH) {
-        
-        H = maxH;
-        W = H * scale;
-    }
-    
-    _clipSize = CGSizeMake(W, H);
 }
 
 - (void)setTargetImage:(UIImage *)targetImage{
@@ -327,22 +317,27 @@
         
         UIBezierPath *path = nil;
         
+        CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
+        
+        CGFloat delta = (self.clipSize.width >= screenW) ? 2 : 0;
+        
         if (_isCircle) {
             
-            path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(1, (JKClipImageScreenHeight - JKClipImageScreenWidth) * 0.5, JKClipImageScreenWidth - 2, JKClipImageScreenWidth) cornerRadius:(JKClipImageScreenWidth - 2) * 0.5];
+            path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake((screenW - (self.clipSize.width - delta)) * 0.5, (JKClipImageScreenHeight - self.clipSize.width - delta) * 0.5, self.clipSize.width - delta, self.clipSize.width - delta) cornerRadius:(self.clipSize.width - delta) * 0.5];
             
         } else {
             
-            CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
+            CGFloat width = self.clipSize.width - delta;
+            CGFloat height = JKClipImageGetScaleHeight(width, self.clipSize.width / self.clipSize.height);
             
-            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.clipSize.width) * 0.5 + 1, (JKClipImageIsDeviceX() ? 100 : 66) + (maxH - self.clipSize.height) * 0.5, self.clipSize.width - 2, self.clipSize.height)];
+            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - width) * 0.5, (JKClipImageIsDeviceX() ? 100 : 66) + (maxH - height) * 0.5, width, height)];
         }
         
         [fullPath appendPath:path];
         [fullPath setUsesEvenOddFillRule:YES];
         
         _shapeLayer.path = fullPath.CGPath;
-        //        _shapeLayer.opacity = 0.4;
+        //_shapeLayer.opacity = 0.4;
         [self.contentView.layer insertSublayer:_shapeLayer above:self.scrollView.layer];
     }
     return _shapeLayer;
@@ -381,6 +376,42 @@
 
 #pragma mark
 #pragma mark - Private Function
+
+- (CGSize)calculateClipSizeWithOriginalSize:(CGSize)originalSize{
+    
+    CGFloat W = originalSize.width;
+    CGFloat H = originalSize.height;
+    
+    CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
+    
+    if (MIN(W, H) <= 0) {
+        
+        W = screenW;
+        H = screenW;
+    }
+    
+    CGFloat scale = W / H;
+    
+    if (W > screenW) {
+        
+        W = screenW;
+        H = W / scale;
+    }
+    
+    if (H > maxH) {
+        
+        H = maxH;
+        W = H * scale;
+    }
+    
+    if (self.isCircle) {
+        
+        W = MIN(W, H);
+        H = W;
+    }
+    
+    return CGSizeMake(W, H);
+}
 
 - (void)calculateInset{
     

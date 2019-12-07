@@ -19,17 +19,20 @@ typedef enum : NSUInteger {
     /** 裁剪方形图片 */
     JKClipImageTypeSquare = 1,
     
+    /** 按比例裁剪图片 */
+    JKClipImageTypeRatio = 2,
+    
     /** 裁剪圆形图片 */
-    JKClipImageTypeCircle = 2,
+    JKClipImageTypeCircle = 3,
     
     /** 自由裁剪图片 */
-    JKClipImageTypeFree = 3,
+    JKClipImageTypeFree = 4,
     
     /** 仅仅展示图片，带导航条 是否带导航条是为了控制上边距 */
-    JKClipImageTypeJustShowImageWithNavBar = 4,
+    JKClipImageTypeJustShowImageWithNavBar = 5,
     
     /** 自由裁剪图片，带导航条 是否带导航条是为了控制上边距 */
-    JKClipImageTypeFreeWithNavBar = 5,
+    JKClipImageTypeFreeWithNavBar = 6,
     
 } JKClipImageType;
 
@@ -38,7 +41,7 @@ typedef enum : NSUInteger {
 #pragma mark
 #pragma mark - Protocol
 
-@protocol JKImageClipActionProtocol
+@protocol JKImageClipProtocol
 
 /** 取消 */
 - (void)cancelButtonClick;
@@ -63,6 +66,11 @@ typedef enum : NSUInteger {
 #define JKClipImageScreenWidth ([UIScreen mainScreen].bounds.size.width)
 /** 屏幕高度 */
 #define JKClipImageScreenHeight ([UIScreen mainScreen].bounds.size.height)
+
+/// 根据宽高比和高度计算宽度 宽高比 = 宽度 / 高度
+#define JKClipImageGetScaleWidth(height, WHRatio) ((height) * (WHRatio))
+/// 根据宽高比和宽度计算高度 宽高比 = 宽度 / 高度
+#define JKClipImageGetScaleHeight(width, WHRatio) ((width) / (WHRatio))
 
 /// 当前导航条高度
 #define JKClipImageCurrentTabBarHeight (JKClipImageIsLandscape() ? self.tabBarController.tabBar.frame.size.height : JKClipImageTabBarHeight())

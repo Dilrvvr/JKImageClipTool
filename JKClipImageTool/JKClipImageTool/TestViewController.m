@@ -192,32 +192,29 @@
     
     if (self.isCropScale) {
         
-        [JKClipImageTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(320, 640) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithSuperView:nil targetImage:pickImage clipImageType:(JKClipImageTypeRatio) clipImageSize:CGSizeMake(320, 640) isAutoSavaToAlbum:NO cancelHandler:^{
+            
+        } completeHandler:^(UIImage *image) {
             
             self.imageView.image = image;
-            
-        } cancel:^{
-            
         }];
         
     }else if (self.isClipSquare) {
         
-        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKClipImageTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithSuperView:nil targetImage:pickImage clipImageType:(JKClipImageTypeSquare) clipImageSize:CGSizeZero isAutoSavaToAlbum:NO cancelHandler:^{
+            
+        } completeHandler:^(UIImage *image) {
             
             self.imageView.image = image;
-            
-        } cancel:^{
-            
         }];
         
     }else{
         
-        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKClipImageTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithSuperView:nil targetImage:pickImage clipImageType:(JKClipImageTypeFree) clipImageSize:CGSizeZero isAutoSavaToAlbum:NO cancelHandler:^{
+            
+        } completeHandler:^(UIImage *image) {
             
             self.imageView.image = image;
-            
-        } cancel:^{
-            
         }];
     }
     

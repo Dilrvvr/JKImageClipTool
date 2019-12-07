@@ -10,8 +10,9 @@
 #import "JKClipImageTool.h"
 
 @interface ClipCircleViewController ()
+
 /** clipView */
-@property (nonatomic, weak) id<JKImageClipActionProtocol> clipView;
+@property (nonatomic, weak) id<JKImageClipProtocol> clipView;
 @end
 
 @implementation ClipCircleViewController
@@ -51,17 +52,17 @@
 //        !weakSelf.cancelHandler ? : weakSelf.cancelHandler();
 //    }];
     
-    _clipView = [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKClipImageTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
-        
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-        
-        !weakSelf.complete ? : weakSelf.complete(image);
-        
-    } cancel:^{
+    _clipView = [JKClipImageTool showWithSuperView:self.view targetImage:self.pickImage clipImageType:(JKClipImageTypeCircle) clipImageSize:CGSizeZero isAutoSavaToAlbum:NO cancelHandler:^{
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
         !weakSelf.cancel ? : weakSelf.cancel();
+        
+    } completeHandler:^(UIImage *image) {
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+        !weakSelf.complete ? : weakSelf.complete(image);
     }];
     
     [_clipView hideBottomView];
