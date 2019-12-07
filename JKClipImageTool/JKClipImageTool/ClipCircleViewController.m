@@ -38,7 +38,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-//    [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeFreeWithNavBar) autoSavaToAlbum:NO completeHandler:^(UIImage *image) {
+//    [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKClipImageTypeFreeWithNavBar) autoSavaToAlbum:NO completeHandler:^(UIImage *image) {
 //
 //        [weakSelf.navigationController popViewControllerAnimated:YES];
 //
@@ -51,7 +51,7 @@
 //        !weakSelf.cancelHandler ? : weakSelf.cancelHandler();
 //    }];
     
-    _clipView = [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKImageClipTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
+    _clipView = [JKClipImageTool showWithImage:self.pickImage superView:self.view imageClipType:(JKClipImageTypeCircle) autoSavaToAlbum:NO complete:^(UIImage *image) {
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
         

@@ -23,41 +23,41 @@
  * completeHandler : 截图完成的回调
  * cancelHandler : 点击取消的回调
  */
-+ (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKImageClipType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
++ (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image superView:(UIView *)superView imageClipType:(JKClipImageType)imageClipType autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
     switch (imageClipType) {
             
-        case JKImageClipTypeJustShowImage:
+        case JKClipImageTypeJustShowImage:
         {
             return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:NO isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
         }
             break;
             
-        case JKImageClipTypeSquare:
+        case JKClipImageTypeSquare:
         {
             return [JKSqureImageClipView showWithImage:image superView:superView isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
-        case JKImageClipTypeCircle:
+        case JKClipImageTypeCircle:
         {
             return [JKSqureImageClipView showWithImage:image superView:superView isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
         }
             break;
             
-        case JKImageClipTypeFree:
+        case JKClipImageTypeFree:
         {
             return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
-        case JKImageClipTypeJustShowImageWithNavBar:
+        case JKClipImageTypeJustShowImageWithNavBar:
         {
             return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:YES isShowNavigationBar:YES isAutoSavaToAlbum:NO cancelHandler:cancel completeHandler:complete];
         }
             break;
             
-        case JKImageClipTypeFreeWithNavBar:
+        case JKClipImageTypeFreeWithNavBar:
         {
             return [JKClipImageFreeTypeView showWithSuperView:superView targetImage:image isJustShowImage:NO isShowNavigationBar:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }

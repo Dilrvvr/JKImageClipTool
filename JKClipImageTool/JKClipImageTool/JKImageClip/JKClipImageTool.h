@@ -9,21 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "JKClipImageConst.h"
 
-typedef enum : NSUInteger {
-    
-    JKImageClipTypeJustShowImage = 0,  // 仅仅展示图片
-    JKImageClipTypeSquare = 1, // 裁剪方形图片
-    JKImageClipTypeCircle = 2, // 裁剪圆形图片
-    JKImageClipTypeFree = 3,   // 自由裁剪图片
-    
-    /** 是否带导航条是为了控制上边距 */
-    JKImageClipTypeJustShowImageWithNavBar = 4, // 仅仅展示图片，带导航条
-    
-    /** 是否带导航条是为了控制上边距 */
-    JKImageClipTypeFreeWithNavBar = 5, // 自由裁剪图片，带导航条
-    
-} JKImageClipType;
-
 @interface JKClipImageTool : NSObject
 
 // ========================================Attention========================================
@@ -48,7 +33,7 @@ typedef enum : NSUInteger {
  */
 + (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image
                                      superView:(UIView *)superView
-                                 imageClipType:(JKImageClipType)imageClipType
+                                 imageClipType:(JKClipImageType)imageClipType
                                autoSavaToAlbum:(BOOL)autoSavaToAlbum
                                       complete:(void(^)(UIImage *image))complete
                                         cancel:(void(^)(void))cancel;

@@ -9,6 +9,33 @@
 #import <UIKit/UIKit.h>
 
 #pragma mark
+#pragma mark - Enum
+
+typedef enum : NSUInteger {
+    
+    /** 仅仅展示图片 */
+    JKClipImageTypeJustShowImage = 0,
+    
+    /** 裁剪方形图片 */
+    JKClipImageTypeSquare = 1,
+    
+    /** 裁剪圆形图片 */
+    JKClipImageTypeCircle = 2,
+    
+    /** 自由裁剪图片 */
+    JKClipImageTypeFree = 3,
+    
+    /** 仅仅展示图片，带导航条 是否带导航条是为了控制上边距 */
+    JKClipImageTypeJustShowImageWithNavBar = 4,
+    
+    /** 自由裁剪图片，带导航条 是否带导航条是为了控制上边距 */
+    JKClipImageTypeFreeWithNavBar = 5,
+    
+} JKClipImageType;
+
+
+
+#pragma mark
 #pragma mark - Protocol
 
 @protocol JKImageClipActionProtocol

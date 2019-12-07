@@ -202,7 +202,7 @@
         
     }else if (self.isClipSquare) {
         
-        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKClipImageTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
@@ -212,7 +212,7 @@
         
     }else{
         
-        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKClipImageTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
