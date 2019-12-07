@@ -35,13 +35,13 @@
             
         case JKClipImageTypeSquare:
         {
-            return [JKSqureImageClipView showWithImage:image superView:superView isCircle:NO autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
         case JKClipImageTypeCircle:
         {
-            return [JKSqureImageClipView showWithImage:image superView:superView isCircle:YES autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+            return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:CGSizeZero isCircle:YES isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
         }
             break;
             
@@ -82,6 +82,6 @@
  */
 + (id<JKImageClipActionProtocol>)showWithImage:(UIImage *)image superView:(UIView *)superView cropSize:(CGSize)cropSize autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel{
     
-    return [JKSqureImageClipView showWithImage:image superView:superView cropSize:cropSize autoSavaToAlbum:autoSavaToAlbum complete:complete cancel:cancel];
+    return [JKSqureImageClipView showWithSuperView:superView targetImage:image clipSize:cropSize isCircle:NO isAutoSavaToAlbum:autoSavaToAlbum cancelHandler:cancel completeHandler:complete];
 }
 @end

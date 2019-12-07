@@ -31,29 +31,17 @@
     CGFloat JKFreeImageClipViewBottomViewH;
 }
 
-/** shapeLayer */
-@property (nonatomic, strong) CAShapeLayer *shapeLayer;
-
 /** 遮盖view */
 @property (nonatomic, weak) JKClipImageFreeTypeCoverView *coverView;
 
 /** rectView */
 @property (nonatomic, weak) JKClipImageFreeTypeRectView *rectView;
 
-/** 截图完成的block */
-@property (nonatomic, copy) void (^completeHandler)(UIImage *image);
-
-/** 取消的block */
-@property (nonatomic, copy) void (^cancelHandler)(void);
-
 /** 图片 */
 @property (nonatomic, strong) UIImage *image;
 
 /** 拖动的角 */
 @property (nonatomic, assign) int startCorner;
-
-/** 是否自动保存截图到相册 */
-@property (nonatomic, assign) BOOL isAutoSavaToAlbum;
 
 /** 是否传入了父试图 */
 @property (nonatomic, assign) BOOL isCustomSuperView;
@@ -97,11 +85,11 @@ static CGFloat const commonMargin_ = 20;
         icv->JKFreeImageClipViewBottomViewH = (JKClipImageIsDeviceX() ? 34 : 0);
     }
     
-    icv.image = targetImage;
     icv.isJustShowImage = isJustShowImage;
-    icv.completeHandler = completeHandler;
-    icv.cancelHandler = cancelHandler;
     icv.isAutoSavaToAlbum = isAutoSavaToAlbum;
+    icv.cancelHandler = cancelHandler;
+    icv.completeHandler = completeHandler;
+    icv.image = targetImage;
     
     if (superView) {
         
@@ -124,6 +112,7 @@ static CGFloat const commonMargin_ = 20;
 - (void)initializeProperty{
     [super initializeProperty];
     
+    self.frame = JKClipImageScreenBounds;
 }
 
 /** 构造函数初始化时调用 注意调用super */
@@ -131,7 +120,6 @@ static CGFloat const commonMargin_ = 20;
     [super initialization];
     
     self.backgroundColor = [UIColor blackColor];
-    self.frame = JKClipImageScreenBounds;
     minWH = 60;
     
     [[UIView appearance] setExclusiveTouch:YES];
@@ -158,13 +146,13 @@ static CGFloat const commonMargin_ = 20;
     JKClipImageFreeTypeCoverView *coverView = [[JKClipImageFreeTypeCoverView alloc] init];
     coverView.center = self.center;
     [self.contentView addSubview:coverView];
-    self.coverView = coverView;
+    _coverView = coverView;
     
     // 方框view
     JKClipImageFreeTypeRectView *rectView = [[JKClipImageFreeTypeRectView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     rectView.center = self.center;
     [self.contentView addSubview:rectView];
-    self.rectView = rectView;
+    _rectView = rectView;
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [rectView addGestureRecognizer:pan];
@@ -224,6 +212,7 @@ static CGFloat const commonMargin_ = 20;
             [UIView setAnimationCurve:(UIViewAnimationCurveEaseIn)];
             
             self.rectView.frame = rect;
+            
             [self.rectView layoutIfNeeded];
             
         } completion:^(BOOL finished) {
@@ -539,7 +528,7 @@ static CGFloat const commonMargin_ = 20;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView{
-//    [self calculateInset];
+    //    [self calculateInset];
     //NSLog(@"图片frame--->%@", NSStringFromCGRect(self.imageView.frame));
 }
 
@@ -616,7 +605,6 @@ static CGFloat const commonMargin_ = 20;
 
 - (UIImage *)clipImage{
     
-    self.shapeLayer.hidden = YES;
     self.bottomView.hidden = YES;
     self.coverView.hidden = YES;
     self.rectView.hidden = YES;

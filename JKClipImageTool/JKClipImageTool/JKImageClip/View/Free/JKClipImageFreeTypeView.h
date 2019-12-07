@@ -18,8 +18,8 @@
  * isJustShowImage : 是否仅展示图片
  * isShowNavigationBar : 是否有导航条，注意必须有父视图，这里才有效，设为YES则会隐藏底部确定取消按钮
  * isAutoSavaToAlbum : 是否自动将截图保存到相册
+ * cancelHandler : 点击取消的回调 
  * completeHandler : 截图完成的回调
- * cancelHandler : 点击取消的回调
  */
 + (instancetype)showWithSuperView:(UIView *)superView
                       targetImage:(UIImage *)targetImage

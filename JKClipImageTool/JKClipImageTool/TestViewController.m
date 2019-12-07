@@ -192,7 +192,7 @@
     
     if (self.isCropScale) {
         
-        [JKClipImageTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(414, 736) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(320, 640) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             

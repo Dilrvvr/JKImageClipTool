@@ -28,6 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /** bottomView */
 @property (nonatomic, weak) UIView *bottomView;
 
+/** 是否自动保存截图到相册 */
+@property (nonatomic, assign) BOOL isAutoSavaToAlbum;
+
+/** 截图完成的block */
+@property (nonatomic, copy) void (^completeHandler)(UIImage *image);
+
+/** 取消的block */
+@property (nonatomic, copy) void (^cancelHandler)(void);
+
 - (void)cancelButtonClick;
 
 - (void)verifyButtonClick;
