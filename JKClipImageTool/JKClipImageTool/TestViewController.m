@@ -7,7 +7,7 @@
 //
 
 #import "TestViewController.h"
-#import "JKImageClipTool.h"
+#import "JKClipImageTool.h"
 #import "ClipCircleViewController.h"
 
 @interface TestViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -192,7 +192,7 @@
     
     if (self.isCropScale) {
         
-        [JKImageClipTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(414, 736) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil cropSize:CGSizeMake(414, 736) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
@@ -202,7 +202,7 @@
         
     }else if (self.isClipSquare) {
         
-        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeSquare) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             
@@ -212,7 +212,7 @@
         
     }else{
         
-        [JKImageClipTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
+        [JKClipImageTool showWithImage:pickImage superView:nil imageClipType:(JKImageClipTypeFree) autoSavaToAlbum:NO complete:^(UIImage *image) {
             
             self.imageView.image = image;
             

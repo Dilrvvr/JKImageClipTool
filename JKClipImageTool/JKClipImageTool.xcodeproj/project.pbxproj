@@ -25,7 +25,7 @@
 		50CA14401F415449002766D2 /* JKClipImageFreeTypeCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14371F415449002766D2 /* JKClipImageFreeTypeCoverView.m */; };
 		50CA14411F415449002766D2 /* JKClipImageFreeTypeRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA14391F415449002766D2 /* JKClipImageFreeTypeRectView.m */; };
 		50CA14421F415449002766D2 /* JKClipImageFreeTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */; };
-		50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143D1F415449002766D2 /* JKImageClipTool.m */; };
+		50CA14431F415449002766D2 /* JKClipImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143D1F415449002766D2 /* JKClipImageTool.m */; };
 		50CA14441F415449002766D2 /* JKSqureImageClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CA143F1F415449002766D2 /* JKSqureImageClipView.m */; };
 		50F3207F1ECEFD260022F298 /* JKClipImageToolResouce.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */; };
 /* End PBXBuildFile section */
@@ -81,8 +81,8 @@
 		50CA14391F415449002766D2 /* JKClipImageFreeTypeRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKClipImageFreeTypeRectView.m; sourceTree = "<group>"; };
 		50CA143A1F415449002766D2 /* JKClipImageFreeTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKClipImageFreeTypeView.h; sourceTree = "<group>"; };
 		50CA143B1F415449002766D2 /* JKClipImageFreeTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKClipImageFreeTypeView.m; sourceTree = "<group>"; };
-		50CA143C1F415449002766D2 /* JKImageClipTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKImageClipTool.h; sourceTree = "<group>"; };
-		50CA143D1F415449002766D2 /* JKImageClipTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKImageClipTool.m; sourceTree = "<group>"; };
+		50CA143C1F415449002766D2 /* JKClipImageTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKClipImageTool.h; sourceTree = "<group>"; };
+		50CA143D1F415449002766D2 /* JKClipImageTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKClipImageTool.m; sourceTree = "<group>"; };
 		50CA143E1F415449002766D2 /* JKSqureImageClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSqureImageClipView.h; sourceTree = "<group>"; };
 		50CA143F1F415449002766D2 /* JKSqureImageClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSqureImageClipView.m; sourceTree = "<group>"; };
 		50F3207E1ECEFD260022F298 /* JKClipImageToolResouce.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JKClipImageToolResouce.bundle; sourceTree = "<group>"; };
@@ -116,8 +116,8 @@
 		5046F4741ECEE3B0003F9AC2 /* JKImageClip */ = {
 			isa = PBXGroup;
 			children = (
-				50CA143C1F415449002766D2 /* JKImageClipTool.h */,
-				50CA143D1F415449002766D2 /* JKImageClipTool.m */,
+				50CA143C1F415449002766D2 /* JKClipImageTool.h */,
+				50CA143D1F415449002766D2 /* JKClipImageTool.m */,
 				50A291DA239B854D00E3265F /* Resource */,
 				50A291DB239B855C00E3265F /* Utility */,
 				50A291DC239B859100E3265F /* View */,
@@ -397,7 +397,7 @@
 				507FA1131EC9A2D70074D808 /* ViewController.m in Sources */,
 				50A291D8239B584A00E3265F /* JKClipImageBaseView.m in Sources */,
 				50A29689207229B9008E75E2 /* ClipCircleViewController.m in Sources */,
-				50CA14431F415449002766D2 /* JKImageClipTool.m in Sources */,
+				50CA14431F415449002766D2 /* JKClipImageTool.m in Sources */,
 				50CA14411F415449002766D2 /* JKClipImageFreeTypeRectView.m in Sources */,
 				50A291D5239B526B00E3265F /* JKClipImageConst.m in Sources */,
 				507FA1101EC9A2D70074D808 /* AppDelegate.m in Sources */,

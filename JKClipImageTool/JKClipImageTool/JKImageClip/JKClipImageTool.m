@@ -1,17 +1,17 @@
 //
-//  JKImageClipTool.m
+//  JKClipImageTool.m
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/19.
 //  Copyright © 2017年 安永博. All rights reserved.
 //
 
-#import "JKImageClipTool.h"
+#import "JKClipImageTool.h"
 
 #import "JKSqureImageClipView.h"
 #import "JKClipImageFreeTypeView.h"
 
-@implementation JKImageClipTool
+@implementation JKClipImageTool
 
 /**
  * 裁剪图片

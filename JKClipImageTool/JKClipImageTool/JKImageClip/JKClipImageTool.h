@@ -1,5 +1,5 @@
 //
-//  JKImageClipTool.h
+//  JKClipImageTool.h
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/19.
@@ -24,7 +24,7 @@ typedef enum : NSUInteger {
     
 } JKImageClipType;
 
-@interface JKImageClipTool : NSObject
+@interface JKClipImageTool : NSObject
 
 // ========================================Attention========================================
 
