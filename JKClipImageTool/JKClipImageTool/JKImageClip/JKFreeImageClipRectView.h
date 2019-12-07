@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface JKFreeImageClipRectView : UIView
+
 /** 左上角 */
 @property (nonatomic, weak, readonly) UIImageView *top_left_imageView;
 

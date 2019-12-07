@@ -21,9 +21,6 @@
 
 /** 隐藏底部view */
 - (void)hideBottomView;
-
-/** 允许dealloc打印，用于检查循环引用 */
-- (void)enableDeallocLog;
 @end
 
 

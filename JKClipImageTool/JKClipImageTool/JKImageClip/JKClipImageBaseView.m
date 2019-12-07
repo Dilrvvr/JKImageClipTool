@@ -134,26 +134,21 @@
 #pragma mark
 #pragma mark - 赋值
 
+
 #pragma mark
 #pragma mark - JKImageClipActionProtocol
+
+- (void)cancelButtonClick{
+    
+}
+
+- (void)verifyButtonClick{
+    
+}
 
 - (void)hideBottomView{
     
     self.bottomView.hidden = YES;
-}
-
-- (void)cancelButtonClick {
-    
-}
-
-
-- (void)enableDeallocLog {
-    
-}
-
-
-- (void)verifyButtonClick {
-    
 }
 
 

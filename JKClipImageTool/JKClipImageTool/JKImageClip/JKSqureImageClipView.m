@@ -11,7 +11,6 @@
 
 @interface JKSqureImageClipView () <UICollectionViewDelegate>
 {
-    BOOL _enableDeallocLog;
     CGFloat maxH;
 }
 /** scrollView */
@@ -550,19 +549,5 @@
     offsetY = (offsetY < 0) ? 0 : offsetY;
     
     self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);//UIEdgeInsets(top: offsetY, left: offsetX, bottom: offsetY, right: offsetX)
-}
-
-/** 允许dealloc打印，用于检查循环引用 */
-- (void)enableDeallocLog{
-    
-    _enableDeallocLog = YES;
-}
-
-- (void)dealloc{
-    
-    if (_enableDeallocLog) {
-        
-        NSLog(@"%d, %s",__LINE__, __func__);
-    }
 }
 @end

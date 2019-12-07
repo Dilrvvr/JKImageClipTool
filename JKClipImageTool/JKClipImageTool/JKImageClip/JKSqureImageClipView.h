@@ -18,7 +18,12 @@
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isCircle:(BOOL)isCircle autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (instancetype)showWithImage:(UIImage *)image
+                    superView:(UIView *)superView
+                     isCircle:(BOOL)isCircle
+              autoSavaToAlbum:(BOOL)autoSavaToAlbum
+                     complete:(void(^)(UIImage *image))complete
+                       cancel:(void(^)(void))cancel;
 
 /**
  * 裁剪正方形图片
@@ -27,5 +32,10 @@
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * complete : 截图完成的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView cropSize:(CGSize)cropSize autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (instancetype)showWithImage:(UIImage *)image
+                    superView:(UIView *)superView
+                     cropSize:(CGSize)cropSize
+              autoSavaToAlbum:(BOOL)autoSavaToAlbum
+                     complete:(void(^)(UIImage *image))complete
+                       cancel:(void(^)(void))cancel;
 @end

@@ -20,7 +20,12 @@
  * complete : 截图完成的回调
  * cancel : 点击取消的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar autoSavaToAlbum:(BOOL)autoSavaToAlbum complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (instancetype)showWithImage:(UIImage *)image
+                    superView:(UIView *)superView
+                 isHaveNavBar:(BOOL)isHaveNavBar
+              autoSavaToAlbum:(BOOL)autoSavaToAlbum
+                     complete:(void(^)(UIImage *image))complete
+                       cancel:(void(^)(void))cancel;
 
 /**
  * 仅展示图片
@@ -28,5 +33,9 @@
  * complete : 点击确定的回调
  * cancel : 点击取消的回调
  */
-+ (instancetype)showWithImage:(UIImage *)image superView:(UIView *)superView isHaveNavBar:(BOOL)isHaveNavBar complete:(void(^)(UIImage *image))complete cancel:(void(^)(void))cancel;
++ (instancetype)showWithImage:(UIImage *)image
+                    superView:(UIView *)superView
+                 isHaveNavBar:(BOOL)isHaveNavBar
+                     complete:(void(^)(UIImage *image))complete
+                       cancel:(void(^)(void))cancel;
 @end

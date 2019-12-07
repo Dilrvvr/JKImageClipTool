@@ -26,7 +26,6 @@
     CGFloat startPicW;
     CGFloat startPicH;
     BOOL isPanning;
-    BOOL _enableDeallocLog;
 }
 /** scrollView */
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -757,19 +756,5 @@ static BOOL isClip = YES;
     }
     
     return newImage;
-}
-
-/** 允许dealloc打印，用于检查循环引用 */
-- (void)enableDeallocLog{
-    
-    _enableDeallocLog = YES;
-}
-
-- (void)dealloc{
-    
-    if (_enableDeallocLog) {
-        
-        NSLog(@"%d, %s",__LINE__, __func__);
-    }
 }
 @end

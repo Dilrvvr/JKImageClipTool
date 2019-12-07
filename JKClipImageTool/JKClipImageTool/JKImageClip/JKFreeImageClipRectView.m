@@ -33,7 +33,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     UIImageView *top_left_imageView = [[UIImageView alloc] init];
-    top_left_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_top_left@3x.png"]];//[UIImage imageNamed:@"corner_top_left"];
+    top_left_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_top_left@3x.png"]];
     [self addSubview:top_left_imageView];
     _top_left_imageView = top_left_imageView;
     
@@ -46,10 +46,8 @@
     [self addConstraints:@[top_left_imageViewCons1, top_left_imageViewCons2, top_left_imageViewCons3, top_left_imageViewCons4]];
     
     
-    
-    
     UIImageView *top_right_imageView = [[UIImageView alloc] init];
-    top_right_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_top_right@3x.png"]];//[UIImage imageNamed:@"corner_top_right"];
+    top_right_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_top_right@3x.png"]];
     [self addSubview:top_right_imageView];
     _top_right_imageView = top_right_imageView;
     
@@ -62,10 +60,8 @@
     [self addConstraints:@[top_right_imageViewCons1, top_right_imageViewCons2, top_right_imageViewCons3, top_right_imageViewCons4]];
     
     
-    
-    
     UIImageView *middle_imageView = [[UIImageView alloc] init];
-//    middle_imageView.backgroundColor = [UIColor redColor];
+    //middle_imageView.backgroundColor = [UIColor redColor];
     [self addSubview:middle_imageView];
     _middle_imageView = middle_imageView;
     
@@ -78,10 +74,8 @@
     [self addConstraints:@[middle_imageViewCons1, middle_imageViewCons2, middle_imageViewCons3, middle_imageViewCons4]];
     
     
-    
-    
     UIImageView *bottom_left_imageView = [[UIImageView alloc] init];
-    bottom_left_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_bottom_left@3x.png"]];//[UIImage imageNamed:@"corner_bottom_left"];
+    bottom_left_imageView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"JKClipImageToolResouce.bundle/images/corner_bottom_left@3x.png"]];
     [self addSubview:bottom_left_imageView];
     _bottom_left_imageView = bottom_left_imageView;
     
@@ -92,8 +86,6 @@
     NSLayoutConstraint *bottom_left_imageViewCons4 = [NSLayoutConstraint constraintWithItem:bottom_left_imageView attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1 constant:30];
     
     [self addConstraints:@[bottom_left_imageViewCons1, bottom_left_imageViewCons2, bottom_left_imageViewCons3, bottom_left_imageViewCons4]];
-    
-    
     
     
     UIImageView *bottom_right_imageView = [[UIImageView alloc] init];
@@ -115,8 +107,6 @@
 //    self.bottom_right_imageView.backgroundColor = [UIColor redColor];
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
@@ -147,7 +137,6 @@
     CGContextMoveToPoint(ctx, 0, rect.size.height / 3 * 2);
     CGContextAddLineToPoint(ctx, rect.size.width, rect.size.height / 3 * 2);
     
-    
     // 竖线
     CGContextMoveToPoint(ctx, rect.size.width / 3, 0);
     CGContextAddLineToPoint(ctx, rect.size.width / 3, rect.size.height);
@@ -166,9 +155,9 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     
-    if ([self.top_left_imageView pointInside:[self convertPoint:point toView:self.top_left_imageView] withEvent:event]         ||
-        [self.top_right_imageView pointInside:[self convertPoint:point toView:self.top_right_imageView] withEvent:event]    ||
-        [self.bottom_left_imageView pointInside:[self convertPoint:point toView:self.bottom_left_imageView] withEvent:event]  ||
+    if ([self.top_left_imageView pointInside:[self convertPoint:point toView:self.top_left_imageView] withEvent:event] ||
+        [self.top_right_imageView pointInside:[self convertPoint:point toView:self.top_right_imageView] withEvent:event] ||
+        [self.bottom_left_imageView pointInside:[self convertPoint:point toView:self.bottom_left_imageView] withEvent:event] ||
         [self.bottom_right_imageView pointInside:[self convertPoint:point toView:self.bottom_right_imageView] withEvent:event] ||
         [self.middle_imageView pointInside:[self convertPoint:point toView:self.middle_imageView] withEvent:event]) {
         

@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** bottomView */
 @property (nonatomic, weak) UIView *bottomView;
 
+- (void)cancelButtonClick;
+
+- (void)verifyButtonClick;
+
 - (void)hideBottomView;
 
 #pragma mark

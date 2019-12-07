@@ -33,11 +33,12 @@
     [super drawRect:rect];
     
     [[UIColor colorWithWhite:0 alpha:0.7] setFill];
+    
     //半透明区域
     UIRectFill(rect);
     
     //透明的区域
-//    CGRect holeRection = CGRectMake(100, 200, 200, 200);
+    //CGRect holeRection = CGRectMake(100, 200, 200, 200);
     /** union: 并集
      CGRect CGRectUnion(CGRect r1, CGRect r2)
      返回并集部分rect

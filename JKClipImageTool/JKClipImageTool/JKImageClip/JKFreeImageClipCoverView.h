@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface JKFreeImageClipCoverView : UIView
+
 /** 透明区域 */
 @property (nonatomic, assign) CGRect transparentRect;
 @end
