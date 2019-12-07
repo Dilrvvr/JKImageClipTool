@@ -52,6 +52,8 @@
     [self createUI];
     [self layoutUI];
     [self initializeUIData];
+    
+    [self setExclusiveTouch:YES];
 }
 
 /** 创建UI 交给子类重写 super自动调用该方法 */

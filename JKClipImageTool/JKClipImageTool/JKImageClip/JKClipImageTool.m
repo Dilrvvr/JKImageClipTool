@@ -74,7 +74,7 @@
  * image : 要裁剪的图片
  * superView : 父视图，注意frame一定要是屏幕大小，否则可能会出现问题
  *             传入父试图，则自己处理父视图显示动画，如果传nil，则默认添加到keywindow
- * cropSize : 裁剪比例
+ * clipSize : 裁剪比例
  * autoSavaToAlbum : 是否自动将截图保存到相册
  * completeHandler : 截图完成的回调
  * cancelHandler : 点击取消的回调

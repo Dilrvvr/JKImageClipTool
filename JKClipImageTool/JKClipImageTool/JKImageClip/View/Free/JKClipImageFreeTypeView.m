@@ -11,9 +11,6 @@
 #import "JKClipImageFreeTypeRectView.h"
 #import "JKClipImageConst.h"
 
-//#define JKFreeImageClipViewTopMinInset (JKClipImageIsDeviceX() ? 54 : 30)
-//#define JKFreeImageClipViewBottomViewH (JKClipImageIsDeviceX() ? 94 : 60)
-
 @interface JKClipImageFreeTypeView () <UIScrollViewDelegate>
 {
     CGFloat maxX;
@@ -25,6 +22,7 @@
     CGFloat minWH;
     CGFloat startPicW;
     CGFloat startPicH;
+    
     BOOL isPanning;
     
     CGFloat JKFreeImageClipViewTopMinInset;
@@ -37,32 +35,27 @@
 /** rectView */
 @property (nonatomic, weak) JKClipImageFreeTypeRectView *rectView;
 
-/** 图片 */
-@property (nonatomic, strong) UIImage *image;
-
 /** 拖动的角 */
 @property (nonatomic, assign) int startCorner;
-
-/** 是否传入了父试图 */
-@property (nonatomic, assign) BOOL isCustomSuperView;
 
 /** 是否仅展示图片 */
 @property (nonatomic, assign) BOOL isJustShowImage;
 @end
 
-// 通用间距
-static CGFloat const commonMargin_ = 20;
+/// 通用间距
+static CGFloat const JKClipImageFreeTypeViewCommonMargin = 20;
 
 @implementation JKClipImageFreeTypeView
 
 /**
  * 自由裁剪图片
- * image : 要裁剪的图片
  * superView : 父视图
- * isHaveNavBar : 是否有导航条，注意必须有父视图，这里才有效，设为YES则会隐藏底部确定取消按钮
+ * targetImage : 要处理的图片
+ * isJustShowImage : 是否仅展示图片
+ * isShowNavigationBar : 是否有导航条，注意必须有父视图，这里才有效，设为YES则会隐藏底部确定取消按钮
  * isAutoSavaToAlbum : 是否自动将截图保存到相册
- * completeHandler : 截图完成的回调
  * cancelHandler : 点击取消的回调
+ * completeHandler : 截图完成的回调
  */
 + (instancetype)showWithSuperView:(UIView *)superView
                       targetImage:(UIImage *)targetImage
@@ -89,7 +82,7 @@ static CGFloat const commonMargin_ = 20;
     icv.isAutoSavaToAlbum = isAutoSavaToAlbum;
     icv.cancelHandler = cancelHandler;
     icv.completeHandler = completeHandler;
-    icv.image = targetImage;
+    icv.targetImage = targetImage;
     
     if (superView) {
         
@@ -113,16 +106,15 @@ static CGFloat const commonMargin_ = 20;
     [super initializeProperty];
     
     self.frame = JKClipImageScreenBounds;
+    
+    self.backgroundColor = [UIColor blackColor];
+    
+    minWH = 60;
 }
 
 /** 构造函数初始化时调用 注意调用super */
 - (void)initialization{
     [super initialization];
-    
-    self.backgroundColor = [UIColor blackColor];
-    minWH = 60;
-    
-    [[UIView appearance] setExclusiveTouch:YES];
     
     // 双击手势
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
@@ -340,7 +332,7 @@ static CGFloat const commonMargin_ = 20;
         maxX = CGRectGetMaxX(self.rectView.frame) - minWH;
         maxY = CGRectGetMaxY(self.rectView.frame) - minWH;
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
+        minX = rect.origin.x < JKClipImageFreeTypeViewCommonMargin ? JKClipImageFreeTypeViewCommonMargin : rect.origin.x;
         minY = rect.origin.y < JKFreeImageClipViewTopMinInset ? JKFreeImageClipViewTopMinInset : rect.origin.y;
         maxW = CGRectGetMaxX(self.rectView.frame) - minX;
         maxH = CGRectGetMaxY(self.rectView.frame) - minY;
@@ -352,9 +344,9 @@ static CGFloat const commonMargin_ = 20;
         
         maxY = CGRectGetMaxY(self.rectView.frame) - minWH;
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        //minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
+        //minX = rect.origin.x < JKClipImageFreeTypeViewCommonMargin ? JKClipImageFreeTypeViewCommonMargin : rect.origin.x;
         minY = rect.origin.y < JKFreeImageClipViewTopMinInset ? JKFreeImageClipViewTopMinInset : rect.origin.y;
-        maxW = (CGRectGetMaxX(rect) > JKClipImageScreenWidth - commonMargin_ ? JKClipImageScreenWidth - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
+        maxW = (CGRectGetMaxX(rect) > JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
         maxH = CGRectGetMaxY(self.rectView.frame) - minY;
         return 2;
     }
@@ -362,8 +354,8 @@ static CGFloat const commonMargin_ = 20;
     if ([self.rectView.bottom_right_imageView pointInside:[self convertPoint:point toView:self.rectView.bottom_right_imageView] withEvent:nil]) {
         
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        maxW = (CGRectGetMaxX(rect) > JKClipImageScreenWidth - commonMargin_ ? JKClipImageScreenWidth - commonMargin_ : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
-        maxH = (CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
+        maxW = (CGRectGetMaxX(rect) > JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin : CGRectGetMaxX(rect)) - self.rectView.frame.origin.x;
+        maxH = (CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
         
         return 3;
     }
@@ -372,10 +364,10 @@ static CGFloat const commonMargin_ = 20;
         
         maxX = CGRectGetMaxX(self.rectView.frame) - minWH;
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
+        minX = rect.origin.x < JKClipImageFreeTypeViewCommonMargin ? JKClipImageFreeTypeViewCommonMargin : rect.origin.x;
         
         maxW = CGRectGetMaxX(self.rectView.frame) - minX;
-        maxH = (CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
+        maxH = (CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
         
         return 4;
     }
@@ -383,11 +375,11 @@ static CGFloat const commonMargin_ = 20;
     if ([self.rectView.center_imageView pointInside:[self convertPoint:point toView:self.rectView.center_imageView] withEvent:nil]) {
         
         CGRect rect = [self.scrollView convertRect:self.imageView.frame toView:self];
-        minX = rect.origin.x < commonMargin_ ? commonMargin_ : rect.origin.x;
+        minX = rect.origin.x < JKClipImageFreeTypeViewCommonMargin ? JKClipImageFreeTypeViewCommonMargin : rect.origin.x;
         minY = rect.origin.y < JKFreeImageClipViewTopMinInset ? JKFreeImageClipViewTopMinInset : rect.origin.y;
         
-        maxX = CGRectGetMaxX(rect) > JKClipImageScreenWidth - commonMargin_ ? JKClipImageScreenWidth - commonMargin_ - self.rectView.frame.size.width : CGRectGetMaxX(rect) - self.rectView.frame.size.width;
-        maxY = CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ - self.rectView.frame.size.height : CGRectGetMaxY(rect) - self.rectView.frame.size.height;
+        maxX = CGRectGetMaxX(rect) > JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin - self.rectView.frame.size.width : CGRectGetMaxX(rect) - self.rectView.frame.size.width;
+        maxY = CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin - self.rectView.frame.size.height : CGRectGetMaxY(rect) - self.rectView.frame.size.height;
         
         //maxW = CGRectGetMaxX(self.rectView.frame) - minX;
         //maxH = (CGRectGetMaxY(rect) > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ ? JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ : CGRectGetMaxY(rect)) - self.rectView.frame.origin.y;
@@ -475,7 +467,7 @@ static CGFloat const commonMargin_ = 20;
     
     if (self.isCustomSuperView) {
         
-        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.image : [self clipImage]);
+        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.targetImage : [self clipImage]);
         
         [self removeFromSuperview];
         
@@ -488,7 +480,7 @@ static CGFloat const commonMargin_ = 20;
         
     } completion:^(BOOL finished) {
         
-        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.image : [self clipImage]);
+        !self.completeHandler ? : self.completeHandler(self.isJustShowImage ? self.targetImage : [self clipImage]);
         
         [self removeFromSuperview];
     }];
@@ -505,15 +497,15 @@ static CGFloat const commonMargin_ = 20;
 #pragma mark
 #pragma mark - 赋值
 
-- (void)setImage:(UIImage *)image{
+- (void)setTargetImage:(UIImage *)targetImage{
     
-    if (!image) { return; }
+    if (!targetImage) { return; }
     
-    _image = image;
+    [super setTargetImage:targetImage];
     
     [self calculateImageViewSize];
     
-    self.imageView.image = image;
+    self.imageView.image = targetImage;
 }
 
 #pragma mark
@@ -558,13 +550,13 @@ static CGFloat const commonMargin_ = 20;
 - (void)calculateImageViewSize{
     
     //图片要显示的尺寸
-    CGFloat pictureW = JKClipImageScreenWidth - commonMargin_ * 2;
-    CGFloat pictureH = pictureW * self.image.size.height / self.image.size.width;
+    CGFloat pictureW = JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin * 2;
+    CGFloat pictureH = pictureW * self.targetImage.size.height / self.targetImage.size.width;
     
-    if (pictureH > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset) {//图片高过屏幕
+    if (pictureH > JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin - JKFreeImageClipViewTopMinInset) {//图片高过屏幕
         
-        pictureH = JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset;
-        pictureW = pictureH * self.image.size.width / self.image.size.height;
+        pictureH = JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin - JKFreeImageClipViewTopMinInset;
+        pictureW = pictureH * self.targetImage.size.width / self.targetImage.size.height;
         
         self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
         //设置scrollView的contentSize
@@ -580,7 +572,7 @@ static CGFloat const commonMargin_ = 20;
     
     //设置scrollView的contentSize
     self.scrollView.contentSize = CGSizeMake(pictureW, pictureH);
-    self.scrollView.maximumZoomScale = (JKClipImageScreenWidth - commonMargin_ * 2) * 3 / ((pictureW >= pictureH) ? pictureH : pictureW);
+    self.scrollView.maximumZoomScale = (JKClipImageScreenWidth - JKClipImageFreeTypeViewCommonMargin * 2) * 3 / ((pictureW >= pictureH) ? pictureH : pictureW);
     
     startPicW = pictureW;
     startPicH = pictureH;
@@ -594,13 +586,13 @@ static CGFloat const commonMargin_ = 20;
     
     // 计算内边距，注意只能使用frame
     CGFloat offsetX = (JKClipImageScreenWidth - self.imageView.frame.size.width) * 0.5;
-    CGFloat offsetY = (JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - commonMargin_ - JKFreeImageClipViewTopMinInset - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetY = (JKClipImageScreenHeight - JKFreeImageClipViewBottomViewH - JKClipImageFreeTypeViewCommonMargin - JKFreeImageClipViewTopMinInset - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
-    offsetX = (offsetX < commonMargin_) ? commonMargin_ : offsetX;
+    offsetX = (offsetX < JKClipImageFreeTypeViewCommonMargin) ? JKClipImageFreeTypeViewCommonMargin : offsetX;
     offsetY = (offsetY < JKFreeImageClipViewTopMinInset) ? JKFreeImageClipViewTopMinInset : offsetY;
     
-    self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, JKFreeImageClipViewBottomViewH + commonMargin_, offsetX);//UIEdgeInsets(top: offsetY, left: offsetX, bottom: offsetY, right: offsetX)
+    self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, JKFreeImageClipViewBottomViewH + JKClipImageFreeTypeViewCommonMargin, offsetX);//UIEdgeInsets(top: offsetY, left: offsetX, bottom: offsetY, right: offsetX)
 }
 
 - (UIImage *)clipImage{

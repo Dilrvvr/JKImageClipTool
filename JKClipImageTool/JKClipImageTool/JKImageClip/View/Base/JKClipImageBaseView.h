@@ -28,6 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** bottomView */
 @property (nonatomic, weak) UIView *bottomView;
 
+/** 图片 */
+@property (nonatomic, strong) UIImage *targetImage;
+
+/** 是否传入了父试图 */
+@property (nonatomic, assign) BOOL isCustomSuperView;
+
 /** 是否自动保存截图到相册 */
 @property (nonatomic, assign) BOOL isAutoSavaToAlbum;
 

@@ -17,17 +17,11 @@
 /** shapeLayer */
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
-/** 图片 */
-@property (nonatomic, strong) UIImage *image;
-
 /** 是否裁剪为圆形 */
 @property (nonatomic, assign) BOOL isCircle;
 
-/** 是否传入了父试图 */
-@property (nonatomic, assign) BOOL isHaveSuperView;
-
 /** 宽高比 */
-@property (nonatomic, assign) CGSize cropSize;
+@property (nonatomic, assign) CGSize clipSize;
 @end
 
 @implementation JKClipImageSquareTypeView
@@ -36,7 +30,7 @@
  * 裁剪正方形图片
  * targetImage : 要裁剪的图片
  * isCircle : 是否裁剪为圆形
- * cropSize : 要裁剪的宽高比
+ * clipSize : 要裁剪的宽高比
  * isAutoSavaToAlbum : 是否自动将截图保存到相册
  * cancelHandler : 点击取消的回调
  * completeHandler : 截图完成的回调
@@ -52,8 +46,8 @@
     if (!targetImage) { return nil; }
     
     JKClipImageSquareTypeView *icv = [[JKClipImageSquareTypeView alloc] init];
-    icv.image = targetImage;
-    icv.cropSize = clipSize;
+    icv.targetImage = targetImage;
+    icv.clipSize = clipSize;
     icv.isCircle = isCircle;
     icv.isAutoSavaToAlbum = isAutoSavaToAlbum;
     icv.cancelHandler = cancelHandler;
@@ -61,7 +55,7 @@
     
     if (superView) {
         
-        icv.isHaveSuperView = YES;
+        icv.isCustomSuperView = YES;
         
         [superView addSubview:icv];
         
@@ -73,9 +67,6 @@
     return icv;
 }
 
-
-
-
 #pragma mark
 #pragma mark - 初始化
 
@@ -83,36 +74,32 @@
 - (void)initializeProperty{
     [super initializeProperty];
     
+    self.frame = JKClipImageScreenBounds;
+    
+    self.backgroundColor = [UIColor blackColor];
+    
+    CGFloat screenH = MAX(JKClipImageScreenWidth, JKClipImageScreenHeight);
+    
+    maxH = (JKClipImageIsDeviceX() ? screenH - 100 - 100 : screenH - 66 - 66);
 }
 
 /** 构造函数初始化时调用 注意调用super */
 - (void)initialization{
     [super initialization];
     
+    self.scrollView.minimumZoomScale = 1;
+    self.scrollView.maximumZoomScale = 3;
+    
+    self.imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
 }
 
 /** 创建UI */
 - (void)createUI{
     [super createUI];
-    
-    self.backgroundColor = [UIColor blackColor];
-    self.frame = JKClipImageScreenBounds;
-    
-    [self setExclusiveTouch:YES];
-    
-    CGFloat screenH = MAX(JKClipImageScreenWidth, JKClipImageScreenHeight);
-    
-    maxH = (JKClipImageIsDeviceX() ? screenH - 100 - 100 : screenH - 66 - 66);
-    
-    
-    
-    self.scrollView.minimumZoomScale = 1;
-    self.scrollView.maximumZoomScale = 3;
-    
-    self.imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
-    doubleTap.numberOfTapsRequired = 2;
-    [self addGestureRecognizer:doubleTap];
     
 }
 
@@ -140,7 +127,7 @@
     
     [self calculateImageViewSize];
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
         self.frame = JKClipImageScreenBounds;
         
@@ -200,7 +187,7 @@
     
     self.userInteractionEnabled = NO;
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
         !self.cancelHandler ? : self.cancelHandler();
         
@@ -232,7 +219,7 @@
     
     self.userInteractionEnabled = NO;
     
-    if (self.isHaveSuperView) {
+    if (self.isCustomSuperView) {
         
         !self.completeHandler ? : self.completeHandler([self clipImage]);
         
@@ -265,7 +252,7 @@
 #pragma mark
 #pragma mark - 赋值
 
-- (void)setCropSize:(CGSize)cropSize{
+- (void)setClipSize:(CGSize)cropSize{
     
     CGFloat W = cropSize.width;
     CGFloat H = cropSize.height;
@@ -291,16 +278,16 @@
         W = H * scale;
     }
     
-    _cropSize = CGSizeMake(W, H);
+    _clipSize = CGSizeMake(W, H);
 }
 
-- (void)setImage:(UIImage *)image{
+- (void)setTargetImage:(UIImage *)targetImage{
     
-    if (!image) { return; }
+    if (!targetImage) { return; }
     
-    _image = image;
+    [super setTargetImage:targetImage];
     
-    self.imageView.image = image;
+    self.imageView.image = targetImage;
 }
 
 #pragma mark
@@ -348,7 +335,7 @@
             
             CGFloat screenW = MIN(JKClipImageScreenWidth, JKClipImageScreenHeight);
             
-            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.cropSize.width) * 0.5 + 1, (JKClipImageIsDeviceX() ? 100 : 66) + (maxH - self.cropSize.height) * 0.5, self.cropSize.width - 2, self.cropSize.height)];
+            path = [UIBezierPath bezierPathWithRect:CGRectMake((screenW - self.clipSize.width) * 0.5 + 1, (JKClipImageIsDeviceX() ? 100 : 66) + (maxH - self.clipSize.height) * 0.5, self.clipSize.width - 2, self.clipSize.height)];
         }
         
         [fullPath appendPath:path];
@@ -364,14 +351,14 @@
 - (void)calculateImageViewSize{
     
     //图片要显示的尺寸
-    CGFloat pictureW = self.cropSize.width;
-    CGFloat pictureH = self.cropSize.width * self.image.size.height / self.image.size.width;
+    CGFloat pictureW = self.clipSize.width;
+    CGFloat pictureH = self.clipSize.width * self.targetImage.size.height / self.targetImage.size.width;
     
-    if (pictureH < self.cropSize.height) {
+    if (pictureH < self.clipSize.height) {
         
-        pictureW = pictureW * self.cropSize.height / pictureH;
+        pictureW = pictureW * self.clipSize.height / pictureH;
         
-        pictureH = self.cropSize.height;
+        pictureH = self.clipSize.height;
     }
     
     self.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
@@ -381,7 +368,7 @@
     
     [self calculateInset];
     
-    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - self.cropSize.height) * 0.5);
+    self.scrollView.contentOffset = CGPointMake(0, -self.scrollView.contentInset.top + (self.imageView.frame.size.height - self.clipSize.height) * 0.5);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
@@ -398,8 +385,8 @@
 - (void)calculateInset{
     
     // 计算内边距，注意只能使用frame
-    CGFloat offsetX = (JKClipImageScreenWidth - (self.cropSize.width)) * 0.5;
-    CGFloat offsetY = self.imageView.frame.size.height >= self.cropSize.height ? (JKClipImageScreenHeight - (self.cropSize.height)) * 0.5 : (JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;//(JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;
+    CGFloat offsetX = (JKClipImageScreenWidth - (self.clipSize.width)) * 0.5;
+    CGFloat offsetY = self.imageView.frame.size.height >= self.clipSize.height ? (JKClipImageScreenHeight - (self.clipSize.height)) * 0.5 : (JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;//(JKClipImageScreenHeight - self.imageView.frame.size.height) * 0.5;
     
     // 当小于0的时候，放大的图片将无法滚动，因为内边距为负数时限制了它可以滚动的范围
     offsetX = (offsetX < 0) ? 0 : offsetX;
@@ -423,7 +410,7 @@
     
     UIGraphicsEndImageContext();
     
-    CGRect rect1 = CGRectMake((JKClipImageScreenWidth - self.cropSize.width) * 0.5, (JKClipImageScreenHeight - self.cropSize.height) * 0.5, self.cropSize.width, self.cropSize.height);
+    CGRect rect1 = CGRectMake((JKClipImageScreenWidth - self.clipSize.width) * 0.5, (JKClipImageScreenHeight - self.clipSize.height) * 0.5, self.clipSize.width, self.clipSize.height);
     
     CGRect rect = [self convertRect:rect1 toView:self.imageView];
     
