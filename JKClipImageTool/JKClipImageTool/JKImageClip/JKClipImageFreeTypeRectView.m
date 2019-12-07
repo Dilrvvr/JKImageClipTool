@@ -1,18 +1,18 @@
 //
-//  JKFreeImageClipRectView.m
+//  JKClipImageFreeTypeRectView.m
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/18.
 //  Copyright © 2017年 安永博. All rights reserved.
 //
 
-#import "JKFreeImageClipRectView.h"
+#import "JKClipImageFreeTypeRectView.h"
 
-@interface JKFreeImageClipRectView ()
+@interface JKClipImageFreeTypeRectView ()
 
 @end
 
-@implementation JKFreeImageClipRectView
+@implementation JKClipImageFreeTypeRectView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {

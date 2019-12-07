@@ -8,7 +8,7 @@
 
 #import "JKClipImageFreeTypeView.h"
 #import "JKClipImageFreeTypeCoverView.h"
-#import "JKFreeImageClipRectView.h"
+#import "JKClipImageFreeTypeRectView.h"
 #import "JKClipImageConst.h"
 
 //#define JKFreeImageClipViewTopMinInset (JKClipImageIsDeviceX() ? 54 : 30)
@@ -38,7 +38,7 @@
 @property (nonatomic, weak) JKClipImageFreeTypeCoverView *coverView;
 
 /** rectView */
-@property (nonatomic, weak) JKFreeImageClipRectView *rectView;
+@property (nonatomic, weak) JKClipImageFreeTypeRectView *rectView;
 
 /** 截图完成的block */
 @property (nonatomic, copy) void (^completeHandler)(UIImage *image);
@@ -161,7 +161,7 @@ static CGFloat const commonMargin_ = 20;
     self.coverView = coverView;
     
     // 方框view
-    JKFreeImageClipRectView *rectView = [[JKFreeImageClipRectView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    JKClipImageFreeTypeRectView *rectView = [[JKClipImageFreeTypeRectView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     rectView.center = self.center;
     [self.contentView addSubview:rectView];
     self.rectView = rectView;

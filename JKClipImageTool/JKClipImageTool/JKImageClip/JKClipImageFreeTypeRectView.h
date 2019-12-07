@@ -1,5 +1,5 @@
 //
-//  JKFreeImageClipRectView.h
+//  JKClipImageFreeTypeRectView.h
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JKFreeImageClipRectView : UIView
+@interface JKClipImageFreeTypeRectView : UIView
 
 /** 左上角 */
 @property (nonatomic, weak, readonly) UIImageView *top_left_imageView;
