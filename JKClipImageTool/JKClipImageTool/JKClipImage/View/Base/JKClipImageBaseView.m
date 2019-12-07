@@ -72,10 +72,10 @@
 
 - (void)createBottomControlUI{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, JKClipImageScreenHeight - 60 - (JKClipImageIsDeviceX() ? 34 : 0), JKClipImageScreenWidth, 60 + (JKClipImageIsDeviceX() ? 34 : 0))];
-    bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
-    [self.contentView addSubview:bottomView];
-    _bottomControlView = bottomView;
+    UIView *bottomControlView = [[UIView alloc] initWithFrame:CGRectMake(0, JKClipImageScreenHeight - 60 - (JKClipImageIsDeviceX() ? 34 : 0), JKClipImageScreenWidth, 60 + (JKClipImageIsDeviceX() ? 34 : 0))];
+    bottomControlView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
+    [self.contentView addSubview:bottomControlView];
+    _bottomControlView = bottomControlView;
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, JKClipImageScreenWidth, 0.5)];
     lineView.userInteractionEnabled = NO;
@@ -86,7 +86,7 @@
     [cancelButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [cancelButton setTitle:@"取消" forState:(UIControlStateNormal)];
     cancelButton.frame = CGRectMake(0, 0, 90, 60);
-    [bottomView addSubview:cancelButton];
+    [bottomControlView addSubview:cancelButton];
     _cancelButton = cancelButton;
     
     [cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -95,7 +95,7 @@
     [verifyButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [verifyButton setTitle:@"确定" forState:(UIControlStateNormal)];
     verifyButton.frame = CGRectMake(JKClipImageScreenWidth - 90, 0, 90, 60);
-    [bottomView addSubview:verifyButton];
+    [bottomControlView addSubview:verifyButton];
     _verifyButton = verifyButton;
     
     [verifyButton addTarget:self action:@selector(verifyButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
