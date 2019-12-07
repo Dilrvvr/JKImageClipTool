@@ -7,7 +7,7 @@
 //
 
 #import "JKClipImageFreeTypeView.h"
-#import "JKFreeImageClipCoverView.h"
+#import "JKClipImageFreeTypeCoverView.h"
 #import "JKFreeImageClipRectView.h"
 #import "JKClipImageConst.h"
 
@@ -35,7 +35,7 @@
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
 /** 遮盖view */
-@property (nonatomic, weak) JKFreeImageClipCoverView *coverView;
+@property (nonatomic, weak) JKClipImageFreeTypeCoverView *coverView;
 
 /** rectView */
 @property (nonatomic, weak) JKFreeImageClipRectView *rectView;
@@ -155,7 +155,7 @@ static CGFloat const commonMargin_ = 20;
     if (self.isJustShowImage) return;
     
     // 遮盖view
-    JKFreeImageClipCoverView *coverView = [[JKFreeImageClipCoverView alloc] init];
+    JKClipImageFreeTypeCoverView *coverView = [[JKClipImageFreeTypeCoverView alloc] init];
     coverView.center = self.center;
     [self.contentView addSubview:coverView];
     self.coverView = coverView;

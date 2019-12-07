@@ -1,5 +1,5 @@
 //
-//  JKFreeImageClipCoverView.h
+//  JKClipImageFreeTypeCoverView.h
 //  JKClipImageTool
 //
 //  Created by albert on 2017/5/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JKFreeImageClipCoverView : UIView
+@interface JKClipImageFreeTypeCoverView : UIView
 
 /** 透明区域 */
 @property (nonatomic, assign) CGRect transparentRect;
